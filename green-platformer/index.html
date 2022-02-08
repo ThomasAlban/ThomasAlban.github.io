@@ -12,73 +12,72 @@
 
 <script>
 //fundamental variables
-var height_of_whole_page = 0;          // the height of the whole page which we will set in do_a_frame
-var width_of_whole_page = 0;           // the width "
-var ctx = myCanvas.getContext("2d");   // Get the drawing context for the canvas
+let height_of_whole_page = 0;          // the height of the whole page which we will set in do_a_frame
+let width_of_whole_page = 0;           // the width "
+const ctx = myCanvas.getContext("2d");   // Get the drawing context for the canvas
 
-var FPS = 60;                          // How many frames per second
-var mouse_x = 0;                       //
-var mouse_y = 0;                       // Where is the mouse
-var ismousedown = false;               // Is the mouse clicked or not
-var leftarrow = false;                 //
-var rightarrow = false;                // are the various arrow keys pressed
-var uparrow = false;                   //
-var downarrow = false;                 //
+const FPS = 60;                          // How many frames per second
+let mouse_x = 0;                       //
+let mouse_y = 0;                       // Where is the mouse
+let ismousedown = false;               // Is the mouse clicked or not
+let leftarrow = false;                 //
+let rightarrow = false;                // are the various arrow keys pressed
+let uparrow = false;                   //
+let downarrow = false;                 //
 
 
 //start screen variables
-var screenXAcc = false;
-var greenXPos = 4;
-var greenXVel = 0;
-var aMonochromaticXPos = 10;
-var aMonochromaticXVel = 0;
-var platformerXPos = 10;
-var platformerXVel = 0;
-var BeginRectWidthShit = [282, 0, 0];   // width, velocity, acceleration
+let screenXAcc = false;
+let greenXPos = 4;
+let greenXVel = 0;
+let aMonochromaticXPos = 10;
+let aMonochromaticXVel = 0;
+let platformerXPos = 10;
+let platformerXVel = 0;
+const BeginRectWidthShit = [282, 0, 0];   // width, velocity, acceleration
 
 
 //timer
-var countupwards = 0;
-var seconds = 0;
-var minutes = 0;
-var shouldWeBeCountingUp = false;
-var timerYPos = 0;
-var seconds = 0;
+let countupwards = 0;
+let seconds = 0;
+let minutes = 0;
+let shouldWeBeCountingUp = false;
+let timerYPos = 0;
 
 
 //death counter
-var deaths = 0;
-var deathCounterSize = 18;              // font size of the death counter, which increases every time you die
-var deathCounterSizeDirection = true;
-var deathCounterSizeChanging = false;
-var deathCounterXPos = -20;
-var deathCounterMode = false;           // false for first death, true for every other death   
-var deathCounterWaitAfterChange = 0;       
+let deaths = 0;
+let deathCounterSize = 18;              // font size of the death counter, which increases every time you die
+let deathCounterSizeDirection = true;
+let deathCounterSizeChanging = false;
+let deathCounterXPos = -20;
+let deathCounterMode = false;           // false for first death, true for every other death   
+let deathCounterWaitAfterChange = 0;       
 
 
 //level variables
-var level = 0;                          // this variable will control which level we are on, 0 means the start screen
+const level = 0;                          // this variable will control which level we are on, 0 means the start screen
 
-var levelFading = false;
-var levelFade = 1;                      // the alpha value for fading
-var levelFadeDirection = false;         // false for fade out, true for fade in
-var nextLevel = false;
-var nextLevelTimer = 0;
+let levelFading = false;
+let levelFade = 1;                      // the alpha value for fading
+let levelFadeDirection = false;         // false for fade out, true for fade in
+let nextLevel = false;
+let nextLevelTimer = 0;
 
 
 // player variables
-var player = new MySprite();
-var arewejumping = false;               // jumping, ARE WE???
-var gravity = 17 / 100;
-var playerspeed = 4;
-var JumpingValue = 4.5;                 // how high we are wanting to jump
-var sides = [0,0,0,0];
-var playerTouchingGround = false;
-var rotatingAreWe = false;              // is the player rotating
-var rotationDirection = false;
-var applyGravity = true;                // applies gravity when true
-var FreezeKeys = true;                  // true, so cant move till touch ground at start
-var touchingWater = false;              // are we touching water
+const player = new MySprite();
+let arewejumping = false;               // jumping, ARE WE???
+const gravity = 17 / 100;
+const playerspeed = 4;
+const JumpingValue = 4.5;                 // how high we are wanting to jump
+const sides = [0,0,0,0];
+let playerTouchingGround = false;
+let rotatingAreWe = false;              // is the player rotating
+let rotationDirection = false;
+let applyGravity = true;                // applies gravity when true
+let FreezeKeys = true;                  // true, so cant move till touch ground at start
+let touchingWater = false;              // are we touching water
 player.x = 10;
 player.y = 229;
 player.size_x = 24;
@@ -88,37 +87,37 @@ player.arewePlayer = true;              //we are the playah, aren't we????????
 
 
 // player dieing variables
-var dieingAreWe = false;                // in the process of dieing, are we?
-var playerFading = false;               // fading, are we?
-var playerFade = 1;                     // how visible are we?
-var playerFadeDirection = false;        // false for fade out, true for fade in
-var respawnPos = [0, 0];                // the position that we are wanting to respawn into
+let dieingAreWe = false;                // in the process of dieing, are we?
+let playerFading = false;               // fading, are we?
+let playerFade = 1;                     // how visible are we?
+let playerFadeDirection = false;        // false for fade out, true for fade in
+const respawnPos = [0, 0];                // the position that we are wanting to respawn into
 
 
 // variables for specific levels
-var spikesInLvl10 = [-1,-1,-1,-1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1];  // Tries to get orientation right when lvl starts, kinda fails but is fine
+const spikesInLvl10 = [-1,-1,-1,-1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1];  // Tries to get orientation right when lvl starts, kinda fails but is fine
 
-var blockade_y_lvl16_left = 200; var blockade_y_lvl16_right = 300;   // y coords for both blockades
-var wait_period_for_blockade_lvl16 = 25000;                          // time until blockade opens
-var wait_interval_until_right_blockade_opens = 0;                    // variable which will be used to store the timeout for the opening of the right blockade
-var right_blockade_should_be_opening = false;                        // the right blockade opening, SHOULD IT BE?
+let blockade_y_lvl16_left = 200; let blockade_y_lvl16_right = 300;   // y coords for both blockades
+const wait_period_for_blockade_lvl16 = 25000;                          // time until blockade opens
+let wait_interval_until_right_blockade_opens = 0;                    // variable which will be used to store the timeout for the opening of the right blockade
+let right_blockade_should_be_opening = false;                        // the right blockade opening, SHOULD IT BE?
 
 // end sequence variables
-var death_counter_x = 10; death_counter_y = 20;
-var timerXPos = 450; timerYPos = 20;
-var timerXVel = 0; timerYVel = 0;
-var timerXAcc = 0; timerYAcc = 0;
-var timer_moving = true;                // Is the timer moving to the middle left
-var timer_growing = false;              // Is it growing
-var timer_grow_factor = 0;              // By how much
-var timer_size = 18;                    // How fat are we currently
-var add_to_timer = 0;                   // Counts upwards while in end sequence,  helps deaths --> time 
-var speed_for_conversion = 40;
-var death_counter_alpha = 1;            // Opacity for death counter fading out once at 0
-var end_text_alpha = 0;
-var link_copied_alpha = 0;
-var link_copied_fading = false;
-var link_copied_fading_direction = true;
+let death_counter_x = 10; let death_counter_y = 20;
+let timerXPos = 450; let timerYPos = 20;
+let timerXVel = 0; timerYVel = 0;
+let timerXAcc = 0; timerYAcc = 0;
+let timer_moving = true;                // Is the timer moving to the middle left
+let timer_growing = false;              // Is it growing
+let timer_grow_factor = 0;              // By how much
+let timer_size = 18;                    // How fat are we currently
+let add_to_timer = 0;                   // Counts upwards while in end sequence,  helps deaths --> time 
+let speed_for_conversion = 40;
+let death_counter_alpha = 1;            // Opacity for death counter fading out once at 0
+let end_text_alpha = 0;
+let link_copied_alpha = 0;
+let link_copied_fading = false;
+let link_copied_fading_direction = true;
 
 
 function MySprite() {
