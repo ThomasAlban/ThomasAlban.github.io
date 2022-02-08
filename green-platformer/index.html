@@ -54,7 +54,7 @@ let deathCounterWaitAfterChange = 0;
 
 
 //level variables
-let level = 0;                          // this variable will control which level we are on, 0 means the start screen
+let level = 17;                          // this variable will control which level we are on, 0 means the start screen
 
 let levelFading = false;
 let levelFade = 1;                      // the alpha value for fading
@@ -81,7 +81,6 @@ player.y = 229;
 player.size_x = 24;
 player.size_y = 24;
 player.rgb = [49, 97, 34];
-player.arewePlayer = true;              //we are the playah, aren't we????????
 
 
 // player dieing variables
@@ -127,12 +126,8 @@ function MySprite() {
    this.acceleration_y = 0;
    this.size_x = 0;
    this.size_y = 0;
-   this.visible= true;
    this.rgb = [0, 0, 0]
-   this.arewePlayer = false;  // are we the playah, aaarrree weeeee?????????
    this.angle = 0;            // How many degrees we are rotated
-   this.flipV = false;        // Are we flipped vertically 
-   this.flipH = false;        // Are we flipped horizontally
 }
 
 MySprite.prototype.Do_Frame_Things = function() {
@@ -146,14 +141,14 @@ MySprite.prototype.Do_Frame_Things = function() {
    
    this.touching = colourCollision(player, [30, 66, 19, 255], 0, 1)     // this checks if the player is touching the colour of the floor
 
-   if (this.arewePlayer == true) {playerCollisions();}
+   playerCollisions();
 
    ctx.translate(this.x + this.size_x/2, this.y + this.size_y/2);    // move the canvas to the guy
    ctx.rotate(this.angle * Math.PI / 180);                           // rotating
 
    ctx.fillStyle ="rgb(" + this.rgb[0] + ", " + this.rgb[1] + ", " + this.rgb[2] + ")";   // Draw us in the correct colour
-   if (this.arewePlayer == true) {ctx.fillStyle ="rgba(" + this.rgb[0] + ", " + this.rgb[1] + ", " + this.rgb[2] + ", " + playerFade + ")";} // Player can fade so alpha value needed
-   if (this.visible) ctx.fillRect(-12, -12, this.size_x, this.size_y);
+   ctx.fillStyle ="rgba(" + this.rgb[0] + ", " + this.rgb[1] + ", " + this.rgb[2] + ", " + playerFade + ")"; // Player can fade so alpha value needed
+   ctx.fillRect(-12, -12, this.size_x, this.size_y);
 
    ctx.restore();                                                    // unwarp the context
 }
@@ -227,7 +222,6 @@ function Do_a_Frame () {
 
 }
 
-
 function DisplayStartText() {
 
    //display start screen
@@ -242,7 +236,7 @@ function DisplayStartText() {
    aMonochromaticXPos = aMonochromaticXVel + aMonochromaticXPos;
    platformerXPos = platformerXVel + platformerXPos;
 
-   ctx.fillText("GREEN", greenXPos , 130);
+   ctx.fillText("GREEN.", greenXPos , 130);
    ctx.font="bold 25px Arial";
    ctx.fillText("A MONOCHROMATIC", aMonochromaticXPos, 170);
    ctx.fillText("PLATFORMER", platformerXPos, 195);
@@ -629,10 +623,11 @@ function BlockadesInLvl16() {
 function RightBlockadeLvl16Trigger() {                                        // this function is called when we are wanting the right blockade to open
    right_blockade_should_be_opening = true;                                   // tell the other function that we are wanting the right blockade to open
 }
-
+timerYPos = 20;
 function DisplayEndScreen() {
    
    level = 17;                                                                                                       // Lvl increases past 17 so sets it back
+
    
    shouldWeBeCountingUp = false;                                                                                     // Stops timer
 
@@ -717,7 +712,7 @@ function DisplayEndScreen() {
    ctx.fillText("YOU HAVE COMPLETED",75,135)
 
    ctx.font = "bold 60px Arial";
-   ctx.fillText("GREEN",143,200)
+   ctx.fillText("GREEN.",136,200)
 
    ctx.font = "30px Arial"; 
    if (mouse_x > 39 && mouse_x < 161 && mouse_y > 419 && mouse_y < 461) {
@@ -747,8 +742,8 @@ function DisplayEndScreen() {
       if (face_num == 6) {face = ";)"}
       if (face_num == 7) {face = "[:"}
 
-      content = "Hi Jon, \nCheck out this awesome game I've found. My score was " + minutes + ":" + printSeconds + ". I bet you can't beat my time "+ face +" \n\n" +
-                "http://127.0.0.1:5500/Javascript/green-platformer.html"
+      content = "Yo Jon, \nCheck out this awesome game I've found. My score was " + minutes + ":" + printSeconds + ". I bet you can't beat my time "+ face +" \n\n" +
+                "https://thomasalban.com/green-platformer/"
       //
 
       ismousedown = false;
