@@ -14,9 +14,9 @@
 //fundamental variables
 let height_of_whole_page = 0;          // the height of the whole page which we will set in do_a_frame
 let width_of_whole_page = 0;           // the width "
-const ctx = myCanvas.getContext("2d");   // Get the drawing context for the canvas
+let ctx = myCanvas.getContext("2d");   // Get the drawing context for the canvas
 
-const FPS = 60;                          // How many frames per second
+let FPS = 60;                          // How many frames per second
 let mouse_x = 0;                       //
 let mouse_y = 0;                       // Where is the mouse
 let ismousedown = false;               // Is the mouse clicked or not
@@ -34,7 +34,7 @@ let aMonochromaticXPos = 10;
 let aMonochromaticXVel = 0;
 let platformerXPos = 10;
 let platformerXVel = 0;
-const BeginRectWidthShit = [282, 0, 0];   // width, velocity, acceleration
+let BeginRectWidthShit = [282, 0, 0];   // width, velocity, acceleration
 
 
 //timer
@@ -56,7 +56,7 @@ let deathCounterWaitAfterChange = 0;
 
 
 //level variables
-const level = 0;                          // this variable will control which level we are on, 0 means the start screen
+let level = 0;                          // this variable will control which level we are on, 0 means the start screen
 
 let levelFading = false;
 let levelFade = 1;                      // the alpha value for fading
@@ -66,12 +66,12 @@ let nextLevelTimer = 0;
 
 
 // player variables
-const player = new MySprite();
+let player = new MySprite();
 let arewejumping = false;               // jumping, ARE WE???
-const gravity = 17 / 100;
-const playerspeed = 4;
-const JumpingValue = 4.5;                 // how high we are wanting to jump
-const sides = [0,0,0,0];
+let gravity = 17 / 100;
+let playerspeed = 4;
+let JumpingValue = 4.5;                 // how high we are wanting to jump
+let sides = [0,0,0,0];
 let playerTouchingGround = false;
 let rotatingAreWe = false;              // is the player rotating
 let rotationDirection = false;
@@ -91,14 +91,14 @@ let dieingAreWe = false;                // in the process of dieing, are we?
 let playerFading = false;               // fading, are we?
 let playerFade = 1;                     // how visible are we?
 let playerFadeDirection = false;        // false for fade out, true for fade in
-const respawnPos = [0, 0];                // the position that we are wanting to respawn into
+let respawnPos = [0, 0];                // the position that we are wanting to respawn into
 
 
 // variables for specific levels
-const spikesInLvl10 = [-1,-1,-1,-1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1];  // Tries to get orientation right when lvl starts, kinda fails but is fine
+let spikesInLvl10 = [-1,-1,-1,-1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1];  // Tries to get orientation right when lvl starts, kinda fails but is fine
 
 let blockade_y_lvl16_left = 200; let blockade_y_lvl16_right = 300;   // y coords for both blockades
-const wait_period_for_blockade_lvl16 = 25000;                          // time until blockade opens
+let wait_period_for_blockade_lvl16 = 25000;                          // time until blockade opens
 let wait_interval_until_right_blockade_opens = 0;                    // variable which will be used to store the timeout for the opening of the right blockade
 let right_blockade_should_be_opening = false;                        // the right blockade opening, SHOULD IT BE?
 
