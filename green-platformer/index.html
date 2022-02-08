@@ -4,11 +4,45 @@
 <link rel="icon" href="icon.png">
 </head>
 
-<body style="background-color: rgb(113, 204, 105)">
+<body style="background-color: rgb(113, 204, 105); margin: 0px;">
 
-<div id="heightandwidth" style="height: 100%; width: 100%"></div>
+<div id="heightandwidth" style="height: 100%; width: 100%;"></div>
 
-<canvas id="myCanvas" width=500 height=500 style="background-color:rgb(98, 180, 73)">
+<div id="bottomsection" style="height: 80%; width: 100%; background-color:rgb(98, 180, 73)"> <!-- the bottom section that you scroll down to -->
+
+   <div style="background-color: rgb(19, 102, 47); height: 10px; width: 100%"></div> <!-- the line -->
+
+   <h1 style="font-family: Arial; font-size: 12vw; color: #316122; position:relative; top:-8vw; text-align: center;"> GREEN. </h1>
+   <h2 style="font-family: Arial; font-size: 4vw; color: #316122; position:relative; top:-15.5vw; text-align: center;"> A MONOCHROMATIC PLATFORMER. </h2>
+   <p style="font-family: Arial; font-size: 2.4vw; font-weight: bold;color: #316122; position:relative; top:-16vw; text-align: center;"> 
+      JUMP. MOVE RIGHT. MOVE LEFT. AVOID SPIKES. GET TO THE RIGHT OF THE LEVEL. AVOID <i>DEATH SNAKES</i>. 
+      YOU WON'T FIND ANYWHERE ELSE SUCH A THRILLING YET SIMPLE PLATFORMER GAME 
+      <i>THAT TOTALLY DOES NOT LAG OUR YOUR COMPUTER DUE TO IT BEING CODED INEFFICIENTLY</i>. NO, NOT AT ALL.
+   </p>
+
+
+
+
+
+
+</div>
+
+<canvas id="myCanvas" width=500 height=500 style="
+   background-color:rgb(98, 180, 73);
+   padding: 0;
+   margin: auto;
+   display: block;
+   height: 90%;
+   width: height;
+
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+
+   border: 10px solid rgb(19, 102, 47);
+">
 
 <script>
 //fundamental variables
@@ -239,7 +273,7 @@ function DisplayStartText() {
    ctx.fillText("GREEN.", greenXPos , 130);
    ctx.font="bold 25px Arial";
    ctx.fillText("A MONOCHROMATIC", aMonochromaticXPos, 170);
-   ctx.fillText("PLATFORMER", platformerXPos, 195);
+   ctx.fillText("PLATFORMER.", platformerXPos, 195);
    ctx.strokeRect(10, 229, 282, 24);
    ctx.fillStyle="rgb(30, 66, 19)";
 
@@ -1351,30 +1385,6 @@ addEventListener("mouseup", OnMouseUp);
 setInterval(Do_a_Frame, 1000/FPS);                             // set my frame renderer
 
 </script>  
-
-<style>
-
-   canvas {
-      padding: 0;
-      margin: auto;
-      display: block;
-      height: 90%;
-      width: height;
-
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-
-      border: 10px solid rgb(19, 102, 47);
-   }
-
-   body {
-      margin: 0px;
-   }
-
-</style>
 
 </body>
 </html>
