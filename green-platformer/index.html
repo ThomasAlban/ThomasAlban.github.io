@@ -1319,25 +1319,23 @@ function KeyDownListener (MyEvent) {                                          //
       case 37: 
       case 65:
       leftarrow = true;     // left
-      event.preventDefault();
          break;
       case 38: 
       case 87:
       uparrow = true;       // up
-      event.preventDefault();
          break;
       case 39: 
       case 68:
       rightarrow = true;    // right
-      event.preventDefault();
          break;
       case 40: 
       case 83:
       downarrow = true;     // down
-      event.preventDefault();
          break;
       }
    }
+   MyEvent.preventDefault();
+
 }
 function KeyUpListener (MyEvent) {                                            // Same thing as above, but for when keys are released
 
