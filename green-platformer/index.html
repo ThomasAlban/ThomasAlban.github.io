@@ -16,7 +16,7 @@
 
    <h1 style="font-family: Arial; font-size: 12vw; color: #316122; position:relative; top:-8vw; text-align: center;"> GREEN. </h1>
    <h2 style="font-family: Arial; font-size: 4vw; color: #316122; position:relative; top:-15.5vw; text-align: center;"> A MONOCHROMATIC PLATFORMER. </h2>
-   <p style="font-family: Arial; font-size: 2.4vw; font-weight: bold;color: #316122; position:relative; top:-16vw; text-align: center;"> 
+   <p style="font-family: Arial; font-size: 2.4vw; font-weight: bold;color: #316122; position:relative; top:-17.5 vw; text-align: center;"> 
       JUMP. MOVE RIGHT. MOVE LEFT. AVOID SPIKES. GET TO THE RIGHT OF THE LEVEL. AVOID <i>DEATH SNAKES</i>. 
       YOU WON'T FIND ANYWHERE ELSE SUCH A THRILLING YET SIMPLE PLATFORMER GAME 
       <i>THAT TOTALLY DOES NOT LAG OUT YOUR COMPUTER DUE TO IT BEING CODED INEFFICIENTLY</i>. NO, NOT AT ALL.
@@ -24,7 +24,7 @@
 
    <canvas id="bottomCanvas" width="300" height="50" style="
       background-color:rgb(98, 180, 73);
-      background-color:rgb(27, 73, 13);
+      /* background-color:rgb(27, 73, 13); */
       padding: 0;
       margin: auto;
       display: block;
@@ -32,15 +32,109 @@
       width: height;
 
       position: absolute;
-      top: calc(120vh + (70vw));
+      top: calc(130vh + (65vw));
       bottom: 0;
       left: 0;
       right: 0;
       
-      /* border: 10px solid rgb(19, 102, 47); */
+      border: 10px solid rgb(19, 102, 47);
    ">
 
 </div>
+
+<script>
+// Share button for bottom canvas
+
+let height_of_whole_page = 0;          // the height of the whole page which we will set in do_a_frame
+let width_of_whole_page = 0;           // the width "
+const ctx = bottomCanvas.getContext("2d"); // Get the drawing context for the canvas
+/* 
+ctx.font="100px";
+ctx.fillStyle="rgb(100,100,100)"
+ctx.fillText("hello"); */
+
+let link_copied_alpha = 0;
+let link_copied_fading = false;
+let link_copied_fading_direction = true;
+
+let mouse_x = 0;                       //
+let mouse_y = 0;                       // Where is the mouse
+
+
+
+// LINK COPIED FADING STUFF
+
+/* function FadeLinkCopied() {
+   if (link_copied_fading == true) {
+      if (link_copied_alpha >= 1) {link_copied_alpha = 1; link_copied_fading_direction = -1;}
+      if (link_copied_alpha < 0) {link_copied_alpha = 0; link_copied_fading_direction = 1; link_copied_fading = false;}
+      link_copied_alpha += 0.02 * link_copied_fading_direction
+   }
+}
+ */
+/* function MouseMoveHandler (MyEvent) {                                         // Detects the mouse movement and sets variables: mouse_x and mouse_y to that
+   height_of_whole_page = document.getElementById("heightandwidth").offsetHeight;         // set the variable to height of page
+   width_of_whole_page = document.getElementById("heightandwidth").offsetWidth;           // set the variable to width of page
+
+   ctx.clearRect(0, 0, bottomCanvas.width, bottomCanvas.height);
+   ctx.fillText("gfhjk");
+   var rect = bottomCanvas.getBoundingClientRect();
+   mouse_x= Math.floor((MyEvent.clientX - rect.left - 10) / (9/5000 * height_of_whole_page)); // Whole shit show about scaling and stuff like that
+   mouse_y= Math.floor((MyEvent.clientY - rect.top - 10) / (9/5000 * height_of_whole_page));  // Makes sure mouse pos is in the right place, even if browser size scales down / up
+
+   ctx.font = "30px Arial"; 
+   if (mouse_x > 39 && mouse_x < 161 && mouse_y > 419 && mouse_y < 461) {
+
+      ctx.fillStyle="rgba(49, 97, 34)";
+      ctx.fillRect(40, 420, 120, 40);                             // highlights start button if mouse is over it
+
+      ctx.fillStyle="rgba(104, 186, 78)";
+      ctx.fillText("SHARE", 50, 450);
+
+   }
+   else {
+      ctx.strokeStyle = "rgba(49, 97, 34)";
+      ctx.lineWidth = 5;
+      ctx.strokeRect(42, 421, 118, 38);                             // highlights start button if mouse is over it
+
+      ctx.fillStyle="rgba(49, 97, 34)";
+      ctx.fillText("SHARE", 50, 450);
+   }
+   if (ismousedown == true && mouse_x > 39 && mouse_x < 161 && mouse_y > 419 && mouse_y < 461) {   // If we are clicking on the "Click here to start"
+      face_num = Math.floor(Math.random()*7 + 1);
+      if (face_num == 1) {face = "~_~"}                           // Picks a random face cos why not
+      if (face_num == 2) {face = ">_<"}
+      if (face_num == 3) {face = "^_^"}
+      if (face_num == 4) {face = "*_*"}
+      if (face_num == 5) {face = "'_'"}
+      if (face_num == 6) {face = ";)"}
+      if (face_num == 7) {face = "[:"}
+
+      content = "Yo Jon, \nCheck out this awesome game I've found. My score was . I bet you can't beat my time "+ face +" \n\n" +
+                "https://thomasalban.com/green-platformer/"
+      //
+
+      ismousedown = false;
+      link_copied_fading = true;
+      link_copied_fading_direction = 1;
+
+      navigator.clipboard.writeText(content);
+   }
+
+   
+   ctx.fillStyle="rgba(49, 97, 34, " + link_copied_alpha + ")";
+   ctx.fillText("Link",400,438)
+   ctx.fillText("Copied",380,463)
+}
+
+function OnMouseDown() {ismousedown = true;} // Tells us when the mouse is clicked
+function OnMouseUp()   {ismousedown = false;}//                            not clicked
+ */
+addEventListener("mousedown", OnMouseDown);
+addEventListener("mouseup", OnMouseUp);
+addEventListener("mousemove", MouseMoveHandler); 
+
+</script>
 
 <canvas id="myCanvas" width=500 height=500 style="
    background-color:rgb(98, 180, 73);
@@ -60,6 +154,7 @@
 ">
 
 <script>
+//if (1==1){
 //fundamental variables
 let height_of_whole_page = 0;          // the height of the whole page which we will set in do_a_frame
 let width_of_whole_page = 0;           // the width "
@@ -672,6 +767,9 @@ function BlockadesInLvl16() {
 function RightBlockadeLvl16Trigger() {                                        // this function is called when we are wanting the right blockade to open
    right_blockade_should_be_opening = true;                                   // tell the other function that we are wanting the right blockade to open
 }
+//}
+
+
 function DisplayEndScreen() {
    
    level = 17;                                                                                                       // Lvl increases past 17 so sets it back
@@ -813,6 +911,8 @@ function DisplayEndScreen() {
    ctx.fillText("Link",400,438)
    ctx.fillText("Copied",380,463)
 }
+
+
 
 function PlayerCollidingWithStuff() {           // Holds all of behaviour of stuff the player can collidee with i.e water, spikes, jumpads, falling off
    
