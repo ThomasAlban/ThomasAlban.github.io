@@ -1,0 +1,1507 @@
+<html>
+<head>
+<title>Green - Monochromatic Platformer</title>
+<link rel="icon" href="icon.png">
+</head>
+
+<body style="background-color: rgb(98, 180, 73); margin: 0px;">
+
+<div id="heightandwidth" style="height: 100%; width: 100%;"></div>
+
+<div id="topSection" style=" position: absolute; top: 0; width: 100%; height: 100%; background-color:rgb(213, 204, 105)"></div>
+
+<div id="bottomSection" style=" width: 100%; height: 100%; max-height: 50vw;  background-color:rgb(98, 180, 73)"> <!-- the bottom section that you scroll down to -->
+
+   <div style="background-color: rgb(19, 102, 47); height: 10px; width: 100%"></div> <!-- the line -->
+
+   <h1 style="font-family: Arial; font-size: 12vw; color: #316122; position:relative; top:-8vw; text-align: center;"> GREEN. </h1>
+   <h2 style="font-family: Arial; font-size: 4vw; color: #316122; position:relative; top:-15.5vw; text-align: center;"> A MONOCHROMATIC PLATFORMER. </h2>
+   <p style="font-family: Arial; font-size: 2.4vw; font-weight: bold;color: #316122; position:relative; top:-17.5 vw; text-align: center;"> 
+      JUMP. MOVE RIGHT. MOVE LEFT. AVOID SPIKES. GET TO THE RIGHT OF THE LEVEL. AVOID <i>DEATH SNAKES</i>. 
+      YOU WON'T FIND ANYWHERE ELSE SUCH A THRILLING YET SIMPLE PLATFORMER GAME 
+      <i>THAT TOTALLY DOES NOT LAG OUT YOUR COMPUTER DUE TO IT BEING CODED INEFFICIENTLY</i>. NO, NOT AT ALL.
+   </p>
+<!-- 
+   <canvas id="bottomCanvas" width="300" height="50" style="
+      background-color:rgb(98, 180, 73);
+      /* background-color:rgb(27, 73, 13); */
+      padding: 0;
+      margin: auto;
+      display: block;
+      height: 20%;
+      width: height;
+
+      position: absolute;
+      top: calc(130vh + (65vw));
+      bottom: 0;
+      left: 0;
+      right: 0;
+      
+      border: 10px solid rgb(19, 102, 47);
+   "> -->
+
+</div>
+<!-- 
+<script>
+// Share button for bottom canvas
+
+let height_of_whole_page = 0;          // the height of the whole page which we will set in do_a_frame
+let width_of_whole_page = 0;           // the width "
+const ctx = bottomCanvas.getContext("2d"); // Get the drawing context for the canvas
+/* 
+ctx.font="100px";
+ctx.fillStyle="rgb(100,100,100)"
+ctx.fillText("hello"); */
+
+let link_copied_alpha = 0;
+let link_copied_fading = false;
+let link_copied_fading_direction = true;
+
+let mouse_x = 0;                       //
+let mouse_y = 0;                       // Where is the mouse
+
+
+
+// LINK COPIED FADING STUFF
+
+/* function FadeLinkCopied() {
+   if (link_copied_fading == true) {
+      if (link_copied_alpha >= 1) {link_copied_alpha = 1; link_copied_fading_direction = -1;}
+      if (link_copied_alpha < 0) {link_copied_alpha = 0; link_copied_fading_direction = 1; link_copied_fading = false;}
+      link_copied_alpha += 0.02 * link_copied_fading_direction
+   }
+}
+ */
+/* function MouseMoveHandler (MyEvent) {                                         // Detects the mouse movement and sets variables: mouse_x and mouse_y to that
+   height_of_whole_page = document.getElementById("heightandwidth").offsetHeight;         // set the variable to height of page
+   width_of_whole_page = document.getElementById("heightandwidth").offsetWidth;           // set the variable to width of page
+
+   ctx.clearRect(0, 0, bottomCanvas.width, bottomCanvas.height);
+   ctx.fillText("gfhjk");
+   var rect = bottomCanvas.getBoundingClientRect();
+   mouse_x= Math.floor((MyEvent.clientX - rect.left - 10) / (9/5000 * height_of_whole_page)); // Whole shit show about scaling and stuff like that
+   mouse_y= Math.floor((MyEvent.clientY - rect.top - 10) / (9/5000 * height_of_whole_page));  // Makes sure mouse pos is in the right place, even if browser size scales down / up
+
+   ctx.font = "30px Arial"; 
+   if (mouse_x > 39 && mouse_x < 161 && mouse_y > 419 && mouse_y < 461) {
+
+      ctx.fillStyle="rgba(49, 97, 34)";
+      ctx.fillRect(40, 420, 120, 40);                             // highlights start button if mouse is over it
+
+      ctx.fillStyle="rgba(104, 186, 78)";
+      ctx.fillText("SHARE", 50, 450);
+
+   }
+   else {
+      ctx.strokeStyle = "rgba(49, 97, 34)";
+      ctx.lineWidth = 5;
+      ctx.strokeRect(42, 421, 118, 38);                             // highlights start button if mouse is over it
+
+      ctx.fillStyle="rgba(49, 97, 34)";
+      ctx.fillText("SHARE", 50, 450);
+   }
+   if (ismousedown == true && mouse_x > 39 && mouse_x < 161 && mouse_y > 419 && mouse_y < 461) {   // If we are clicking on the "Click here to start"
+      face_num = Math.floor(Math.random()*7 + 1);
+      if (face_num == 1) {face = "~_~"}                           // Picks a random face cos why not
+      if (face_num == 2) {face = ">_<"}
+      if (face_num == 3) {face = "^_^"}
+      if (face_num == 4) {face = "*_*"}
+      if (face_num == 5) {face = "'_'"}
+      if (face_num == 6) {face = ";)"}
+      if (face_num == 7) {face = "[:"}
+
+      content = "Yo Jon, \nCheck out this awesome game I've found. My score was . I bet you can't beat my time "+ face +" \n\n" +
+                "https://thomasalban.com/green-platformer/"
+      //
+
+      ismousedown = false;
+      link_copied_fading = true;
+      link_copied_fading_direction = 1;
+
+      navigator.clipboard.writeText(content);
+   }
+
+   
+   ctx.fillStyle="rgba(49, 97, 34, " + link_copied_alpha + ")";
+   ctx.fillText("Link",400,438)
+   ctx.fillText("Copied",380,463)
+}
+
+function OnMouseDown() {ismousedown = true;} // Tells us when the mouse is clicked
+function OnMouseUp()   {ismousedown = false;}//                            not clicked
+ */
+addEventListener("mousedown", OnMouseDown);
+addEventListener("mouseup", OnMouseUp);
+addEventListener("mousemove", MouseMoveHandler); 
+
+</script>
+ -->
+<canvas id="myCanvas" width=500 height=500 style="
+   background-color:rgb(98, 180, 73);
+   padding: 0;
+   margin: auto;
+   display: block;
+   height: 90%;
+   width: height;
+
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+
+   border: 10px solid rgb(19, 102, 47);
+">
+
+<script>
+//if (1==1){
+//fundamental variables
+let height_of_whole_page = 0;          // the height of the whole page which we will set in do_a_frame
+let width_of_whole_page = 0;           // the width "
+const ctx = myCanvas.getContext("2d"); // Get the drawing context for the canvas
+
+const FPS = 60;                        // How many frames per second
+let mouse_x = 0;                       //
+let mouse_y = 0;                       // Where is the mouse
+let ismousedown = false;               // Is the mouse clicked or not
+let leftarrow = false;                 //
+let rightarrow = false;                // are the various arrow keys pressed
+let uparrow = false;                   //
+let downarrow = false;                 //
+
+
+//start screen variables
+let screenXAcc = false;
+let greenXPos = 4;
+let greenXVel = 0;
+let aMonochromaticXPos = 10;
+let aMonochromaticXVel = 0;
+let platformerXPos = 10;
+let platformerXVel = 0;
+const BeginRectWidthShit = [282, 0, 0];// width, velocity, acceleration
+
+
+//timer
+let countupwards = 0;
+let seconds = 0;
+let minutes = 0;
+let shouldWeBeCountingUp = false;
+
+//death counter
+let deaths = 0;
+let deathCounterSize = 18;              // font size of the death counter, which increases every time you die
+let deathCounterSizeDirection = true;
+let deathCounterSizeChanging = false;
+let deathCounterXPos = -20;
+let deathCounterMode = false;           // false for first death, true for every other death   
+let deathCounterWaitAfterChange = 0;       
+
+
+//level variables
+let level = 0;                          // this variable will control which level we are on, 0 means the start screen
+
+let levelFading = false;
+let levelFade = 1;                      // the alpha value for fading
+let levelFadeDirection = false;         // false for fade out, true for fade in
+let nextLevel = false;
+let nextLevelTimer = 0;
+
+
+// player variables
+const player = new MySprite();
+let arewejumping = false;               // jumping, ARE WE???
+let gravity = 17 / 100;
+let playerspeed = 4;
+let JumpingValue = 4.5;                 // how high we are wanting to jump
+let sides = [0,0,0,0];
+let playerTouchingGround = false;
+let rotatingAreWe = false;              // is the player rotating
+let rotationDirection = false;
+let applyGravity = true;                // applies gravity when true
+let FreezeKeys = true;                  // true, so cant move till touch ground at start
+let touchingWater = false;              // are we touching water
+player.x = 10;
+player.y = 229;
+player.size_x = 24;
+player.size_y = 24;
+player.rgb = [49, 97, 34];
+
+
+// player dieing variables
+let dieingAreWe = false;                // in the process of dieing, are we?
+let playerFading = false;               // fading, are we?
+let playerFade = 1;                     // how visible are we?
+let playerFadeDirection = false;        // false for fade out, true for fade in
+let respawnPos = [0, 0];                // the position that we are wanting to respawn into
+
+
+// variables for specific levels
+const spikesInLvl10 = [-1,-1,-1,-1,1,1,1,1,1,1,-1,-1,-1,-1,-1,-1,-1];// Tries to get orientation right when lvl starts, kinda fails but is fine
+
+let blockade_y_lvl16_left = 200; let blockade_y_lvl16_right = 300;   // y coords for both blockades
+let wait_period_for_blockade_lvl16 = 25000;                          // time until blockade opens
+let wait_interval_until_right_blockade_opens = 0;                    // variable which will be used to store the timeout for the opening of the right blockade
+let right_blockade_should_be_opening = false;                        // the right blockade opening, SHOULD IT BE?
+
+// end sequence variables
+let death_counter_x = 10; let death_counter_y = 20;
+let timerXPos = 450; let timerYPos = 0;
+let timerXVel = 0; timerYVel = 0;
+let timerXAcc = 0; timerYAcc = 0;
+let timer_moving = true;                // Is the timer moving to the middle left
+let timer_growing = false;              // Is it growing
+let timer_grow_factor = 0;              // By how much
+let timer_size = 18;                    // How fat are we currently
+let add_to_timer = 0;                   // Counts upwards while in end sequence,  helps deaths --> time 
+let speed_for_conversion = 40;
+let death_counter_alpha = 1;            // Opacity for death counter fading out once at 0
+let end_text_alpha = 0;
+let link_copied_alpha = 0;
+let link_copied_fading = false;
+let link_copied_fading_direction = true;
+
+
+function MySprite() {
+   this.x = 0;
+   this.y = 0; 
+   this.velocity_x = 0;
+   this.velocity_y = 0;
+   this.acceleration_x = 0;
+   this.acceleration_y = 0;
+   this.size_x = 0;
+   this.size_y = 0;
+   this.rgb = [0, 0, 0]
+   this.angle = 0;            // How many degrees we are rotated
+}
+
+MySprite.prototype.Do_Frame_Things = function() {
+   ctx.save();
+      
+   this.x = this.x + this.velocity_x;
+   this.y = this.y + this.velocity_y;                                // move the thing
+   this.velocity_x = this.velocity_x + this.acceleration_x;
+   this.velocity_y = this.velocity_y + this.acceleration_y;
+   if (applyGravity == true) {this.velocity_y += gravity;}           // get affected by gravity if we want gravity applied
+   
+   this.touching = colourCollision(player, [30, 66, 19, 255], 0, 1)     // this checks if the player is touching the colour of the floor
+
+   playerCollisions();
+
+   ctx.translate(this.x + this.size_x/2, this.y + this.size_y/2);    // move the canvas to the guy
+   ctx.rotate(this.angle * Math.PI / 180);                           // rotating
+
+   ctx.fillStyle ="rgb(" + this.rgb[0] + ", " + this.rgb[1] + ", " + this.rgb[2] + ")";   // Draw us in the correct colour
+   ctx.fillStyle ="rgba(" + this.rgb[0] + ", " + this.rgb[1] + ", " + this.rgb[2] + ", " + playerFade + ")"; // Player can fade so alpha value needed
+   ctx.fillRect(-12, -12, this.size_x, this.size_y);
+
+   ctx.restore();                                                    // unwarp the context
+}
+
+function Do_a_Frame () {
+
+   ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+
+   height_of_whole_page = document.getElementById("heightandwidth").offsetHeight;         // set the variable to height of page
+   width_of_whole_page = document.getElementById("heightandwidth").offsetWidth;           // set the variable to width of page
+
+   if (FreezeKeys == false) {
+      if (rightarrow == true && leftarrow == false) {player.acceleration_x = 0.25;}       // makes the player accelerate right
+      if (leftarrow == true && rightarrow == false) {player.acceleration_x = -0.25;}      // makes the player accelerate left
+      if (rightarrow == false && player.velocity_x > 0) {player.acceleration_x = -0.2;}   // makes the player decellerate
+      if (leftarrow == false && player.velocity_x < 0) {player.acceleration_x = 0.2;}     //
+      if (leftarrow == false && rightarrow == false && player.velocity_x > -0.5 && player.velocity_x < 0.5) {player.velocity_x = 0;}   // resets the velocity when no keys are down
+      if (player.velocity_x > playerspeed) {player.velocity_x = playerspeed}              // caps the velocity at a defined speed "playerspeed" which is a variable above
+      if (player.velocity_x < -playerspeed) {player.velocity_x = -playerspeed}            //
+   }
+
+
+   if (uparrow == true && arewejumping == false && playerTouchingGround == true) {player.velocity_y = -JumpingValue; arewejumping = true}   // make the guy jump
+
+   if (player.x > (myCanvas.width - player.size_x)) {                                     // are we at the very right of the screen, if so, start the next level sequence
+
+      if (FreezeKeys == false) {player.acceleration_x = 0; player.velocity_x = 0; player.acceleration_y = 0; player.velocity_y = 0;} // sets the player speed to 0
+
+      FreezeKeys = true;                                    // Stop movement
+      nextLevel = true;                                     // Start next level sequence
+      levelFadeDirection = false;                           // Get the level fading in the right direction
+      player.acceleration_y = 0; player.acceleration_x = 0; // Stop x movment
+   }
+
+   if (nextLevel == true) {NextLevelSequence()}
+
+   if (dieingAreWe == true) {diedHaveWe()}
+
+   if (level==0) {
+      DisplayStartText();
+      if (ismousedown == true && mouse_x > 10 && mouse_x < 292 && mouse_y > 229 && mouse_y < 253) {   // If we are clicking on the "Click here to start"
+         screenXAcc = true;                                                                           // Start flying off to the right
+      }
+   }
+
+   switch (level) {
+      case 1: DisplayLevel1(); break;
+      case 2: DisplayLevel2(); break;
+      case 3: DisplayLevel3(); break;
+      case 4: DisplayLevel4(); break;
+      case 5: DisplayLevel5(); break;
+      case 6: DisplayLevel6(); break;
+      case 7: DisplayLevel7(); break;
+      case 8: DisplayLevel8(); break;
+      case 9: DisplayLevel9(); break;
+      case 10: DisplayLevel10(); break;
+      case 11: DisplayLevel11(); break;
+      case 12: DisplayLevel12(); break;
+      case 13: DisplayLevel13(); break;
+      case 14: DisplayLevel14(); break;
+      case 15: DisplayLevel15(); break;
+      case 16: DisplayLevel16(); break;
+      case 17: 
+      case 18: DisplayEndScreen(); break;                      // End screen / sequence,  >= 17 needed because it for some reason goes past 17
+   }
+
+   if (level != 0 && level!=17) {DisplayDeathCounter()}                            // Display the death counter unless we are at the end screen
+
+   if (playerTouchingGround == true) {shouldWeBeCountingUp = true}   // Starts timer when play touches the ground for first time
+   if (shouldWeBeCountingUp == true && level != 17) {Timer()}        // Counts upwards and display timer unless we are at the end screen
+
+}
+
+function DisplayStartText() {
+
+   //display start screen
+   ctx.font="bold 90px Arial";                                    //all the formatting for the start screen
+   ctx.fillStyle="rgb(49, 97, 34)";
+
+   if (screenXAcc == true) {greenXVel += 0.13;}                   //change 0.13 to change acceleration speed
+   if (screenXAcc == true) {aMonochromaticXVel += 0.09;}          //these just seem to work nicely
+   if (screenXAcc == true) {platformerXVel += 0.075;}
+
+   greenXPos = greenXVel + greenXPos;                             // Move the starting text ("GREEN, a mono...")
+   aMonochromaticXPos = aMonochromaticXVel + aMonochromaticXPos;
+   platformerXPos = platformerXVel + platformerXPos;
+
+   ctx.fillText("GREEN.", greenXPos , 130);
+   ctx.font="bold 25px Arial";
+   ctx.fillText("A MONOCHROMATIC", aMonochromaticXPos, 170);
+   ctx.fillText("PLATFORMER.", platformerXPos, 195);
+   ctx.strokeRect(10, 229, 282, 24);
+   ctx.fillStyle="rgb(30, 66, 19)";
+
+   ctx.fillRect(0, 400, myCanvas.width, 100);                     // Floor
+
+   if (mouse_x > 10 && mouse_x < 292 && mouse_y > 229 && mouse_y < 253) {
+      ctx.fillStyle="rgb(49, 97, 34)";
+      ctx.fillRect(10, 229, 282, 24);                             // highlights start button if mouse is over it
+      ctx.fillStyle="rgb(104, 186, 78)";
+      ctx.fillText("CLICK HERE TO BEGIN", 11, 250);
+   } else {
+      ctx.fillStyle="rgb(49, 97, 34)";
+      ctx.fillText("CLICK HERE TO BEGIN", 11, 250);
+   }
+   if (screenXAcc == true) {                                      // BeginRectWidthShit = [xSize, xVel, xAcc]
+      BeginRectWidthShit[0] -= BeginRectWidthShit[1];             // width of rectangle = width plus velocity
+      BeginRectWidthShit[1] += BeginRectWidthShit[2];             // velocity of rectangle = velocity plus acceleration
+      if (BeginRectWidthShit[0]>160) {                            //
+         BeginRectWidthShit[2] +=0.001;                           // all of this basically changes the acceleration so that the 
+      } else if (BeginRectWidthShit[0]>24) {                      // rectangle becomes the right size for the player
+         BeginRectWidthShit[2] -=0.001;                           //
+      } else {
+         BeginRectWidthShit[0] = 24;
+         level ++;                                                // moves us to level 1
+      }
+
+      ctx.fillStyle="rgb(98, 180, 73)";
+      ctx.fillRect(5, 220, 300, 50);   
+      ctx.fillStyle="rgb(49, 97, 34)";
+      ctx.fillRect(10, 229, BeginRectWidthShit[0], 24);
+
+   }
+
+}
+
+function DisplayLevel1() {
+
+   ctx.fillStyle="rgba(30, 66, 19, "+levelFade+")";    //levelFade is for fading between levels
+   ctx.fillRect(0, 400, myCanvas.width, 100);          // the floor of the level
+
+   PlayerCollidingWithStuff();
+   player.Do_Frame_Things();
+   
+}
+function DisplayLevel2() {
+
+   ctx.fillStyle="rgba(30, 66, 19, "+levelFade+")";
+   ctx.fillRect(0, 400, myCanvas.width, 100);         // the floor of the level
+   ctx.fillRect(220, 250, 50, 150);                   // the pillar
+
+   PlayerCollidingWithStuff()
+   player.Do_Frame_Things();
+}
+function DisplayLevel3() {
+   ctx.fillStyle="rgba(30, 66, 19, "+levelFade+")";
+   ctx.fillRect(0, 400, myCanvas.width, 100);         // the floor of the level
+
+   ctx.fillRect(0, 0, 50, 200);                       // First pillar down
+   ctx.fillRect(120, 100, 50, 300);                   // First up
+   ctx.fillRect(240, 0, 50, 350);                     // down
+   ctx.fillRect(360, 100, 50, 300);                   // up
+   ctx.fillRect(480, 0, 50, 300);                     // down
+
+   PlayerCollidingWithStuff()
+   player.Do_Frame_Things();
+}
+function DisplayLevel4() {
+   ctx.fillStyle="rgba(30, 66, 19, "+levelFade+")";
+   ctx.fillRect(0, 400, 100, 100);                                                           // the floor of the level
+
+   ctx.fillRect(470, Math.sin(-countupwards*0.03)*50+300, 50, 250);                          // the 2 barrier platforms
+   ctx.fillRect(470, Math.sin(-countupwards*0.03)*50-100, 50, 300);                          //
+
+   ctx.fillRect((Math.sin(countupwards*0.03)*100+260), 350, 60, 20)                          // the platform that moves
+
+   
+   PlayerCollidingWithStuff();                                                               // Check if we have fallen off
+   player.Do_Frame_Things();
+}
+function DisplayLevel5() {
+
+   ctx.fillStyle="rgba(30, 66, 19, "+levelFade+")";
+   ctx.fillRect(0, 400, myCanvas.width, 100);         // the floor of the level
+
+   DrawSpike(100, 400, 30, 30, 1);                    // draw ourselves some spikes
+   DrawSpike(250, 400, 30, 30, 1);                    //
+   DrawSpike(400, 400, 30, 30, 1);                    //
+
+   PlayerCollidingWithStuff()                         // Check if we are touching said spikes
+   player.Do_Frame_Things();
+}
+function DisplayLevel6() {
+
+   ctx.fillStyle="rgba(30, 66, 19, "+levelFade+")";    //levelFade is for fading between levels
+
+   ctx.fillRect(0, 400, 120, 100);                     // the platform on the left
+   ctx.fillRect(380, 400, 500, 100);                   // the platform on the right
+
+   ctx.fillRect(235, Math.sin(-countupwards*0.03)*50+350, 30, 250);  // the bottom moving wall
+   ctx.fillRect(235, Math.sin(-countupwards*0.03)*50-100, 30, 300);  // the top moving wall
+
+   DrawSpike(250, Math.sin(-countupwards*0.03)*50+350.5, 30, 30, 1); // Spike facing up
+   DrawSpike(250, Math.sin(-countupwards*0.03)*50+199.5, 30, 30, 3); // Spike facing down
+
+   for (var i=0; i<5; i++) {
+      DrawSpike(235, Math.sin(-countupwards*0.03)*50 + 370 + i*40, 40, 15, 4);   // Spikes on the left wall
+
+      DrawSpike(265, Math.sin(-countupwards*0.03)*50 + 370 + i*40, 40, 15, 2);   // Spikes on the right wall
+   }
+   
+   
+   PlayerCollidingWithStuff();                                       // Check if we have fallen off, or are touching spikes
+   player.Do_Frame_Things();
+}
+function DisplayLevel7() {
+
+   ctx.fillStyle="rgba(30, 66, 19, "+levelFade+")";
+   ctx.fillRect(0, 400, myCanvas.width, 100);         // the floor of the level
+   ctx.fillRect(430, 120, 100, 280);
+   
+   DrawJumpPad(250, 400, 30, 10);                     // Draw the jump pad, (x, y, width, height)
+
+   for (var i=0; i<7; i++){
+      DrawSpike(430, 380 - i*40, 40, 15, 4);          // Spikes on the side of the wall
+   }
+
+   
+   PlayerCollidingWithStuff()                         // Are we touching spikes or jump pads
+   player.Do_Frame_Things();
+}
+function DisplayLevel8() {
+
+   ctx.fillStyle="rgba(30, 66, 19, "+levelFade+")";
+   ctx.fillRect(0, 400, myCanvas.width, 100);                     // the floor of the level
+   ctx.fillRect(80, 40, 420, 190);                                // the wall/ceiling
+   ctx.fillStyle="rgba(30, 66, 19, "+(levelFade/1.07)+")";        // the secret exit colour
+   ctx.fillRect(80, 0, 420, 40)                                   // the secret exit
+
+   for (var i=95; i<495; i+=30) {DrawSpike(i, 230, 30, 30, 3)}    // draw all our spikes satisfyingly
+
+   DrawJumpPad(Math.sin(countupwards*0.03)*100+209, 400, 30, 10); // Oscillating jump pads
+   DrawJumpPad(Math.sin(countupwards*0.03)*100+369, 400, 30, 10);
+
+   PlayerCollidingWithStuff()                                     // See function for full abilities
+   player.Do_Frame_Things();
+}
+function DisplayLevel9() {
+
+   ctx.fillStyle="rgba(30, 66, 19, "+levelFade+")";
+   ctx.fillRect(0, 400, myCanvas.width, 100);                     // the floor of the level
+   ctx.fillRect(0, 40, 420, 20);                                  // the secret exit
+   ctx.fillRect(140, 150, 20, 250);                               // first upward wall
+   ctx.fillRect(200, 60, 20, 150)                                 // downward wall before second upward wall
+   ctx.fillRect(330, 150, 20, 250);                               // second upward wall
+   ctx.fillRect(485, 0, 15, 300)                                  // barrier at very right of level
+
+   ctx.fillRect(Math.sin(countupwards*0.05)*40+55, 200, 24, 10);  // First moving spike platform
+   DrawSpike(Math.sin(countupwards*0.05)*40+67, 200, 24, 10,1);   // downwards moving spike
+   DrawSpike(Math.sin(countupwards*0.05)*40+67, 210, 24, 10,3);   // upwards moving spike
+
+   ctx.fillStyle="rgba(30, 66, 19, "+levelFade+")";
+   ctx.fillRect(Math.sin(countupwards*0.05)*30+265, 200, 24, 10);  // Second moving spike platform
+   DrawSpike(Math.sin(countupwards*0.05)*30+277, 200, 24, 10,1);   // downwards moving spike
+   DrawSpike(Math.sin(countupwards*0.05)*30+277, 210, 24, 10,3);   // upwards moving spike
+
+
+   DrawJumpPad(80, 400, 30, 10);
+   DrawJumpPad(270, 400, 30,10);
+
+   for (var i = 175; i<400; i+=50) {DrawSpike(140, i, 50, 13, 4)} // draw all the spikes for the first upward wall
+   for (var i = 175; i<400; i+=50) {DrawSpike(330, i, 50, 13, 4)} // draw all the spikes for the second upward wall
+
+
+   PlayerCollidingWithStuff();
+   player.Do_Frame_Things();
+}
+function DisplayLevel10() {
+   ctx.fillStyle="rgba(30, 66, 19, "+levelFade+")";
+   ctx.fillRect(0, 400, myCanvas.width, 100);                     // the floor of the level
+   ctx.fillRect(100, 0, myCanvas.width, 250);                     // the ceiling of the level
+
+   for (var i=0; i<4; i++) {
+      //                    x      minY, maxY, sizex, sizey, offset, spikenum
+      DrawUpDownSpikes(130 + i*38, 250,  400,  24,    30,    i*10,   i, 4);
+   }
+   for (var i=4; i<9; i++) {
+      //                    x      minY, maxY, sizex, sizey, offset, spikenum
+      DrawUpDownSpikes(160 + i*38, 250,  400,  24,    30,    i*10,   i, 4);
+   }
+   
+   
+   PlayerCollidingWithStuff()
+   player.Do_Frame_Things();
+}
+function DisplayLevel11() {
+
+   ctx.fillStyle="rgba(30, 66, 19, "+levelFade+")";
+   ctx.fillRect(0, 400, myCanvas.width, 100);         // the floor of the level
+   ctx.fillRect(450, 100, 50, 300);                   // the pillar
+
+   for (var i=0; i<9; i++) {
+      drawLeftRightPlatformBiiitch(100 + i*30, i*70)  // Moving platforms that follow the tan graph (yPos, time offset)
+   }
+
+   for (var i=0; i<10; i++) {                         // Spieks for the wall
+      DrawSpike(450, 115 + i*30, 30, 15, 4)
+   }
+
+   for (var i=0; i<10; i++) {                         // Spikes for the floor
+      DrawSpike(150 + i*30, 400, 30, 15, 1)
+   }
+   
+   PlayerCollidingWithStuff()
+   player.Do_Frame_Things();
+
+
+}
+function DisplayLevel12() {
+
+   ctx.fillStyle="rgba(30, 66, 19, "+levelFade+")";    //levelFade is for fading between levels
+
+   for (var i=0; i<33; i++) {
+      ctx.fillStyle="rgba(30, 66, 19, "+levelFade+")";            //Re declares colour, otherwise gets messed up
+      drawSpikeBall(480 - i*10, 350, 50, 500, i * 30, 1.5, 1.5);  // See function for inputs
+   }
+
+   ctx.fillStyle="rgba(30, 66, 19, "+levelFade+")";    // Again  re declares colour, otherwise gets messed up
+   ctx.fillRect(80, 0, 420, 250);                      // the wall/ceiling
+   ctx.fillRect(0, 400, myCanvas.width, 100);          // the floor of the level
+   
+
+   PlayerCollidingWithStuff()
+   player.Do_Frame_Things();
+
+}
+function DisplayLevel13() {
+
+   ctx.fillStyle="rgba(30, 66, 19, "+levelFade+")";
+   ctx.fillRect(0, 400, myCanvas.width, 100);         // the floor of the level
+   ctx.fillRect(250, 250, 50, 150);                   // the pillar
+
+   ctx.fillRect(100, 200, 50, 150);                   // another pillar
+
+   ctx.fillRect(100, 0, 400, 200);                    // the wall/ceiling
+
+   DrawWater(150,200,100,200);                        // Draw water function, takes same inputs as fillRect
+
+   PlayerCollidingWithStuff();                        // Also includes water behaviour and if we are touching it
+   player.Do_Frame_Things();
+}
+function DisplayLevel14() {
+
+   ctx.fillStyle="rgba(30, 66, 19, "+levelFade+")";
+   ctx.fillRect(0, 400, myCanvas.width, 100);         // the floor of the level
+
+   DrawWater(90, 30, 350, 370);                       // The water for the level
+
+   ctx.fillRect(60, 0, 30, 300);                      // The level
+   ctx.fillRect(270, 100, 30, 300);                   //
+   ctx.fillRect(440, 0, 30, 300);
+   ctx.fillRect(90, 0, 350, 30);
+   
+   for (var i = 0; i<3; i++) {DrawSpike(105 + i*30, 200, 30, 20, 3, 3)} // Spikes on left
+
+   DrawSpike(255, 200, 30, 20, 3);                                      // Spike on right
+
+   ctx.fillRect(90, 180, 90, 20);                                       // rest of the level
+   ctx.fillRect(240, 180, 30, 20)
+
+
+   PlayerCollidingWithStuff();
+   player.Do_Frame_Things();
+}
+function DisplayLevel15() {
+   
+   DrawWater(175,0,275,400)
+   
+   for (var i=0; i<30; i++) {
+      ctx.fillStyle="rgba(30, 66, 19, "+levelFade+")";   
+      drawSpikeBall(300, 250, 100, 200,i * 3, 3.2,1); // bottom centipede
+   }
+   
+   for (var i=0; i<30; i++) {
+      ctx.fillStyle="rgba(30, 66, 19, "+levelFade+")";  
+      drawSpikeBall(300, 150, 100, 75, i* 3, 1,2);    // top centipede  
+   }
+
+   ctx.fillStyle="rgba(30, 66, 19, "+levelFade+")";
+   ctx.fillRect(0, 400, myCanvas.width, 100);         // the floor of the level
+   ctx.fillRect(125, 0, myCanvas.width - 100, 10);    // ceiling
+   ctx.fillRect(285, 100, 50, 300); // middle pillar
+   ctx.fillRect(125, 0, 50, 325);   // left hand side pillar
+   ctx.fillRect(450, 0, 50, 325);   // right hand side pillar
+   ctx.fillRect(410, 200, 40, 50)   // Wall at end
+
+   DrawSpike(410, 225, 50, 25, 4)   // Spikes at end
+   DrawSpike(365, 400, 40, 25, 1)
+   DrawSpike(405, 400, 40, 25, 1)
+
+   PlayerCollidingWithStuff();
+   player.Do_Frame_Things();
+}
+function DisplayLevel16() {
+
+   //countupwards = 0;
+   DrawWater(100,100,300,300)
+   ctx.fillStyle="rgba(30, 66, 19, "+levelFade+")";
+
+   for (var i=0; i<20; i++) {
+      drawSpikeBall(250, 250, 120, 180, i*5,1.3,-1)                  // long boi
+   }
+   for (var i=0; i<10; i++) {
+      drawSpikeBall(250, 250, 130, 200, i*5,1.75,0.75)               // short boi
+   }           
+
+   drawSpikeBall(250, 250, 75, 75, 0, 1.2, -1.2);                    // Rotating spike balls
+   drawSpikeBall(250, 250, 75, 75, 785, 1.2, -1.2);
+
+   ctx.fillStyle="rgba(30, 66, 19, "+levelFade+")";
+   ctx.fillRect(0, 400, myCanvas.width, 100);                        // the floor of the level
+
+
+   ctx.fillRect(100, 30, 300, 70);                                   // ceiling of box
+   ctx.fillRect(400, 30, 50, 270);                                   // right wall of box
+   ctx.fillRect(50, 30, 50, 270);                                    // left wall of box
+
+
+   ctx.fillStyle="rgba(54, 143, 63, "+levelFade+")";
+   ctx.fillRect(50, 300, 50, 100);                                   // weird coloured wall on left
+   ctx.fillRect(400, 300, 50, 100);                                  // weird coloured wall on right
+
+   ctx.fillStyle="rgba(30, 66, 19, "+(levelFade/1.07)+")";           // the secret exit colour
+   ctx.fillRect(50, 0, 400, 30)                                      // the secret exit
+
+   BlockadesInLvl16();                                               // Gets us trapped
+
+   PlayerCollidingWithStuff();
+   player.Do_Frame_Things();
+
+}
+
+function BlockadesInLvl16() {
+
+   if (player.x > 95 && player.y > 60 && FreezeKeys === false) {                                                                               // if we are in THE ZONE
+
+      if (blockade_y_lvl16_left < 300) {blockade_y_lvl16_left+=0.5}                                                           // shut the left blockade
+
+      if (wait_interval_until_right_blockade_opens == 0) {                                                                    // if the timeout has not been set,
+         wait_interval_until_right_blockade_opens = setTimeout(RightBlockadeLvl16Trigger, wait_period_for_blockade_lvl16);    // set the right blockade timeout
+      }
+
+   } else {                                                             // if we are not in THE ZONE
+
+      right_blockade_should_be_opening = false;                         // stop the right blockade from opening
+      if (blockade_y_lvl16_left > 200) {blockade_y_lvl16_left-=0.68}    // if the left blockade is shut, open it
+      if (blockade_y_lvl16_right < 300) {blockade_y_lvl16_right++};     // if the right blockade is open, shut it
+      clearTimeout(wait_interval_until_right_blockade_opens);           // clear the timer so that it doesn't randomly open after we die or something
+      wait_interval_until_right_blockade_opens = 0;                     // erase the variable for the timer
+
+   }
+
+   if (right_blockade_should_be_opening == true) {                      // if we are wanting the right blockade to open
+
+      if (player.x > 95) {                                              // if we are still in THE ZONE
+         if (blockade_y_lvl16_right > 200) {blockade_y_lvl16_right--}   // open the blockade
+      }
+   }
+
+   ctx.fillStyle="rgba(30, 66, 19, "+levelFade+")";                           // set the blockade colour to the wall colour
+
+   ctx.fillRect(50, blockade_y_lvl16_left, 50, 100);                          // blockade on left
+   ctx.fillRect(400, blockade_y_lvl16_right, 50, 100);                        // blockade on right
+
+
+   ctx.strokeStyle="rgba(54, 143, 63, "+levelFade+")"; ctx.lineWidth = 5;     // the colour for the blockade outlines
+
+   ctx.strokeRect(60, blockade_y_lvl16_left+10, 30, 80);                      // outline in blockade, left
+   ctx.strokeRect(410, blockade_y_lvl16_right+10, 30, 80);                    // outline in blockade, left
+
+}
+function RightBlockadeLvl16Trigger() {                                        // this function is called when we are wanting the right blockade to open
+   right_blockade_should_be_opening = true;                                   // tell the other function that we are wanting the right blockade to open
+}
+//}
+
+
+function DisplayEndScreen() {
+   
+   level = 17;                                                                                                       // Lvl increases past 17 so sets it back
+
+   
+   shouldWeBeCountingUp = false;                                                                                     // Stops timer
+
+
+   // TIMER
+
+   if (timer_moving == true) {                                                                                       // Moves the timer into the middle left, whilst growing in size
+      if (timerXPos >= 390) {timerXAcc = -0.04; timerYAcc = 0.036; timer_growing = true; timer_grow_factor = 0.125}  // accelerate us a little bit towards the desired pos
+      else if (timerXPos >= 329) {timerXAcc = -0.07; timerYAcc = 0.072; timer_grow_factor = 0.27016129032258}        // accelerates more, the "0.27016..." is basically pointless, dw about it
+      else if (timerXPos >= 200) {timerXAcc = 0.033; timerYAcc = -0.0513}                                            // deccelerate
+
+      if (timerYPos >= 250 && timerXPos <= 150) {timerXPos = 150; timerYPos = 250; timer_moving = false;}            // Once timer is in correct position stop us
+      if (timer_size < 50 && timer_growing == true) {timer_size += timer_grow_factor;}                               // whilest we aren't thic enough: grow
+      else {timer_growing = false}                                                                                   // otherwise stop
+   }
+
+   if (timer_moving == false) {timerXAcc = 0; timerXVel = 0; timerYAcc = 0; timerYVel = 0; }                         // When timer stops moving, it actually stops
+
+   timerXVel += timerXAcc;                                                                                           // standard acc, vel, and position
+   timerYVel += timerYAcc;
+
+   timerXPos += timerXVel;
+   timerYPos += timerYVel;
+
+   death_counter_x -= timerXVel;                                                                                     // aplies the tiemr movement but to the death counter
+   death_counter_y += timerYVel;                                                                                     // but to the right and down instead of left
+
+
+   // CONVERT DEATHS TO TIME
+
+   if (timer_moving == false) {                                                                                      // Once timer has stopped moving, convert deaths to seconds 5 --> 1
+      add_to_timer ++;                                                                                               // Helps convert them with a timer for frames
+
+      if (deaths < 10) {speed_for_conversion = 5;}
+      else if (deaths < 15) {speed_for_conversion = 5;}
+      else if (deaths < 30) {speed_for_conversion = 2.5;}
+      else if (deaths < 60) {speed_for_conversion = 2.5;}
+      else {speed_for_conversion = 2.5;}
+
+      if (deaths != 0) {                                                                                             // If we still have deaths, convert them
+         if (add_to_timer / speed_for_conversion == Math.floor(add_to_timer / speed_for_conversion)) {               // every 40 frames, remove a death
+            deaths --;
+            add_to_timer = 0;
+         }
+         if (add_to_timer / (speed_for_conversion / 5) == Math.floor(add_to_timer / (speed_for_conversion / 5))) {   // every 8 frames add one to seconds,
+            seconds ++;                                                                                              // gives appearence of deaths converting to seconds
+         }
+      }
+      else if (death_counter_alpha >= 0) {death_counter_alpha -= 0.01}                                               // once deaths left are at 0, fade it out
+      else if (timerXPos <= 187) {timerXPos += 0.5; timerYPos += 0.5}                                                                  // once deaths have faded out, move timer to middle/* 
+      else if (timerYPos <= 275) {timerYPos += 0.5}                                                                  // once deaths have faded out, move timer to middle */
+   
+   }
+   // DRAW TIMER AND DEATHS
+
+   ctx.font = timer_size + "px Arial"; 
+   ctx.fillStyle="rgba(182, 235, 166, " + death_counter_alpha + ")";
+
+   ctx.fillText(deaths, death_counter_x, death_counter_y)
+
+   ctx.fillStyle="rgb(182, 235, 166)";                                                                               // write deaths and timer in correct place
+   if (seconds >= 60) {                                                                                              // adn with correct formatting from Timer() function
+      minutes++;
+      seconds -= 60;
+   }
+   if (seconds < 10) {printSeconds = "0" + seconds}                                                                  // so that we have a 0 in front of seconds so it always fills 2 digits
+   else {printSeconds = seconds;}
+
+   if (minutes < 10) {ctx.fillText("0" + minutes + ":" + printSeconds, timerXPos, timerYPos)}                        // put a 0 in front of minutes if it's less than 10
+   else {ctx.fillText(minutes + ":" + printSeconds, timerXPos, timerYPos)}                                           // otherwise don't do that
+   
+
+   // END CREDITS
+   //ctx.fillText(mouse_x + ", " + mouse_y, 20, 50)
+
+   if (timerXPos == 187.5 && end_text_alpha < 1) {end_text_alpha += 0.005} // Once time is in middle, fade in
+
+   ctx.font = "bold 30px Arial"; 
+   ctx.fillStyle="rgba(30, 66, 19, " + end_text_alpha + ")";
+   ctx.fillText("CONGRATULATIONS",100,100)
+   
+   ctx.fillText("YOU HAVE COMPLETED",75,135)
+
+   ctx.font = "bold 60px Arial";
+   ctx.fillText("GREEN.",136,200)
+
+   ctx.font = "30px Arial"; 
+   if (mouse_x > 39 && mouse_x < 161 && mouse_y > 419 && mouse_y < 461) {
+
+      ctx.fillStyle="rgba(49, 97, 34, " + end_text_alpha + ")";
+      ctx.fillRect(40, 420, 120, 40);                             // highlights start button if mouse is over it
+
+      ctx.fillStyle="rgba(104, 186, 78, " + end_text_alpha + ")";
+      ctx.fillText("SHARE", 50, 450);
+
+   }
+   else {
+      ctx.strokeStyle = "rgba(49, 97, 34, " + end_text_alpha + ")";
+      ctx.lineWidth = 5;
+      ctx.strokeRect(42, 421, 118, 38);                             // highlights start button if mouse is over it
+
+      ctx.fillStyle="rgba(49, 97, 34, " + end_text_alpha + ")";
+      ctx.fillText("SHARE", 50, 450);
+   }
+   if (end_text_alpha >= 0.5 && ismousedown == true && mouse_x > 39 && mouse_x < 161 && mouse_y > 419 && mouse_y < 461) {   // If we are clicking on the "Click here to start"
+      face_num = Math.floor(Math.random()*7 + 1);
+      if (face_num == 1) {face = "~_~"}                           // Picks a random face cos why not
+      if (face_num == 2) {face = ">_<"}
+      if (face_num == 3) {face = "^_^"}
+      if (face_num == 4) {face = "*_*"}
+      if (face_num == 5) {face = "'_'"}
+      if (face_num == 6) {face = ";)"}
+      if (face_num == 7) {face = "[:"}
+
+      content = "Yo Jon, \nCheck out this awesome game I've found. My score was " + minutes + ":" + printSeconds + ". I bet you can't beat my time "+ face +" \n\n" +
+                "https://thomasalban.com/green-platformer/"
+      //
+
+      ismousedown = false;
+      link_copied_fading = true;
+      link_copied_fading_direction = 1;
+
+      navigator.clipboard.writeText(content);
+   }
+
+
+   // LINK COPIED FADING STUFF
+
+   if (link_copied_fading == true) {
+      if (link_copied_alpha >= 1) {link_copied_alpha = 1; link_copied_fading_direction = -1;}
+      if (link_copied_alpha < 0) {link_copied_alpha = 0; link_copied_fading_direction = 1; link_copied_fading = false;}
+      link_copied_alpha += 0.02 * link_copied_fading_direction
+   }
+   ctx.fillStyle="rgba(49, 97, 34, " + link_copied_alpha + ")";
+   ctx.fillText("Link",400,438)
+   ctx.fillText("Copied",380,463)
+}
+
+
+
+function PlayerCollidingWithStuff() {           // Holds all of behaviour of stuff the player can collidee with i.e water, spikes, jumpads, falling off
+   
+   // TOP OF SCREEN
+   if (player.y<=0) {player.velocity_y = 0; player.y = 1}
+
+   // LEFT OF SCREEN
+   if (player.x <= 1 && player.velocity_x < 0) {player.velocity_x = 0; player.x = 1}      // stop you from falling off the left of the canvas
+
+   // FALLING OFF
+   if (player.y >= 476) {justDiedWeHave(10, 300)}                                // if we have fallen off then make us die
+
+   // SPIKES
+   if (colourCollision(player, [38, 77, 27, 255], 0, 0) != 0                     // 2 colourCollisions cos spikes have 2 colours
+   ||  colourCollision(player, [70, 130, 53, 255], 0, 0) != 0) {                 // if we are touching spikes then make us die
+      justDiedWeHave(10, 300)
+   } 
+
+
+   // WATER
+   
+   if (colourCollision(player, [143, 245, 111, 255], 0, 0) != 0) {touchingWater = true;}
+   else {touchingWater = false;}
+
+   if (touchingWater == true) {
+      if (player.touching != 1) {player.velocity_y -= gravity}                   // Gravity still gets applied, but this counteracts it
+      player.acceleration_y = - 0.01;                                            // Slight upwards acceleration, for floating upwards
+      player.acceleration_x = player.acceleration_x / 3                          // Makes much more slidey while in water
+      
+      if (player.velocity_y <= -1.25) {player.velocity_y = -1.25;}               // Terminal velocity upwards - cos - is up
+
+      if (downarrow == true) {player.acceleration_y = 0.03}                      // Lets us sink when we want
+
+      if (colourCollision(player, [30, 66, 19, 255], -2, 0) == 1                 // Checks Both sides to fix problem with going through top corners
+      ||  colourCollision(player, [30, 66, 19, 255], 2, 0) == 1) {
+         player.velocity_y = 0.1;
+      }
+   }
+
+
+   // JUMP PADS
+   
+   if (rotatingAreWe == false) {                                                 // Does rotation off jump pads depending on which direction we r going
+      if (player.velocity_x >= 0) {rotationDirection = true}
+      else {rotationDirection = false
+      }
+   }
+
+   if (colourCollision(player, [62, 133, 61, 255], 0, 0) != 0) {                 // if we are touching jump pad then make us jump
+      player.velocity_y = -10; rotatingAreWe = true;
+      }
+
+
+   if (rotatingAreWe == true) {                                                  // If we are rotating
+
+      if (rotationDirection == true) {                                           // Rotate correctily for diff directions
+         if (player.angle < 180) {
+            player.angle+= 5;
+         } else {
+            rotatingAreWe = false;                                               // Once rotated, stop rotating
+            player.angle = 0;
+         }
+      } else {                                                                   // Exact same stuff but for diff direction
+         if (player.angle > -180) {
+            player.angle-= 5;
+         } else {
+            rotatingAreWe = false;
+            player.angle = 0;
+         }
+      }
+   }
+
+}
+
+function DrawWater(x, y, sizex, sizey) {        // Draws water, takes exact same params as fillRect(x, y, width, height)
+   ctx.save();
+   ctx.fillStyle="rgba(143, 245, 111, "+levelFade+")";
+   ctx.fillRect(x, y, sizex, sizey);
+   ctx.restore();
+}
+
+function drawSpikeBall(xPos, yPos, sizex, sizey, time,speedX,speedY) {        // Draws a spikeball on a circle graph, see circlePosition for how it works
+   
+   position = circlePosition(xPos, yPos, sizex, sizey, time,speedX,speedY)    // Gets position it chould be at in circle graph form inputs
+   posX = position[0];
+   posY = position[1];
+
+   ctx.fillRect(posX, posY, 20, 20);                  // center block
+
+   DrawSpike(posX + 10, posY , 20, 15, 1);            // top spike
+   DrawSpike(posX + 20, posY + 10 , 20, 15, 2);       // left spike
+   DrawSpike(posX + 10, posY + 20 , 20, 15, 3);       // bottom
+   DrawSpike(posX, posY + 10, 20, 15, 4);             // right
+}
+
+function circlePosition(xPos, yPos, sizex, sizey, time, speedX, speedY) {     // Returns position on a circle graph depending on params
+
+   numberX = (countupwards + time)*speedX/100;  // Just to make cos(...) neater, uses timer value + offset / speed for that axis,
+   numberY = (countupwards + time)*speedY/100;  // Before being put into the cos and sin functions
+
+   xVal = Math.cos(numberX)*sizex + xPos;       // Makes a cos graph and outputs where the x is based on the size, and number above
+   yVal = Math.sin(numberY)*sizey + yPos;       // Same but for sin on the y, see blow for how circle graph works
+
+   return [xVal, yVal];
+
+   // 
+   // A sin and cosine graph can combine to make a circle graph because:
+   // 
+   // When 0 is inputed, sin = 0, cos = 1
+   // When 90 inputed,   sin = 1, cos = 0
+   // Then,              sin = 0, cos = -1
+   // Lastly,            sin = -1, cos = 0
+   //
+   // See how this will make a circle
+}
+
+function drawLeftRightPlatformBiiitch(yPos, offset) {                         // Draws platform for lvl 11, follows tan graph
+
+   ctx.fillStyle="rgba(30, 66, 19, "+levelFade+")";                                                                  // Sets fillstyle
+
+   ctx.fillRect(Math.tan((countupwards)*0.004 + offset)*200 + 100, yPos, 46, 20)                                     // Actual platform
+
+   ctx.beginPath();                                                                                                  // Hemisphere on bottom
+   //                   X value, following tan graph,                 y       width, height, stuff to draw the actual elipse
+   ctx.ellipse(Math.tan((countupwards)*0.004 + offset)*200 + 123, yPos + 20 , 23, 10, Math.PI, Math.PI, Math.PI*2);
+   
+   ctx.fill();                                                                                                       // Fill the hemisphere
+
+}
+
+function DrawUpDownSpikes(xPos, minY, maxY, sizex, sizey, offSet, spikeNum, speed) {               // Draws the spikes that go up and down in lvl 10
+   
+
+   waveSize = (maxY - minY) / 2;                                                                   // Sin returns -1 -- 1, range of 2, so size needs the be halfed
+   distance = maxY - waveSize;                                                                     // Finds middle of sin graph
+   partInWave = Math.sin((countupwards + offSet)*speed/100)*waveSize + distance;                   // Finds where it is in sin graph, so goes up and down
+
+   if      (partInWave >= maxY - 1) {spikesInLvl10[spikeNum] = 1}                                  // Does direction for spikes when they are in the middle
+   else if (partInWave <= minY + 1) {spikesInLvl10[spikeNum] = -1}                                 //
+
+   if (partInWave >= maxY - sizey) {                                                               // When it is at extremes, touching the ceiling, sets size down
+      //alert()
+      DrawSpike(xPos, partInWave, sizex, (maxY - (partInWave)) * spikesInLvl10[spikeNum], 1);      // Sets size down so doesn't go past ceiling, if confused, working out needed
+   }
+
+   else if (partInWave <= minY + sizey) {                                                          // Same as above, but for other side
+      DrawSpike(xPos, partInWave, sizex, (minY - (partInWave)) * spikesInLvl10[spikeNum] * -1, 1);
+   }
+   else {DrawSpike(xPos, partInWave, sizex, sizey * spikesInLvl10[spikeNum], 1);}                  // When in the middle area
+   
+   /* What it used to be, keep in case of bugs or needed otherwise.
+
+
+   if (Math.sin(countupwards*0.04)*75 + 325 >= 399) {spikeInLvl10Rotation = 1}
+   else if (Math.sin(countupwards*0.04)*75 + 325 <= 251) {spikeInLvl10Rotation = -1}
+
+   if (Math.sin(countupwards*0.04)*75 + 325 >= 380) {
+      DrawSpike(130, Math.sin(countupwards*0.04)*75 + 325, 24, (400 - (Math.sin(countupwards*0.04)*75 + 325))*spikeInLvl10Rotation,1);
+   } 
+   else if (Math.sin(countupwards*0.04)*75 + 325 <= 270) {
+      DrawSpike(130, Math.sin(countupwards*0.04)*75 + 325, 24, (250 - (Math.sin(countupwards*0.04)*75 + 325))*spikeInLvl10Rotation*-1,1);
+   }
+   else {DrawSpike(130, Math.sin(countupwards*0.04)*75 + 325, 24, 20*spikeInLvl10Rotation,1);} */
+
+}
+
+function DrawSpike(x, y, width, height, rotation) {                           // Draws a spike, x and y are the center not the top, width is always base
+   ctx.save();
+   if (rotation == 1) {                                        // if we are wanting it to face upwards
+      ctx.fillStyle="rgba(38, 77, 27, "+levelFade+")";
+      
+      ctx.beginPath();
+      ctx.moveTo(x-(width/2), y);                              // Left bottom corner of spike
+      ctx.lineTo(x, y);                                        // Middle
+
+      ctx.lineTo(x, y-height);                                 // Top
+      ctx.fill();
+
+      ctx.fillStyle="rgba(70, 130, 53, "+levelFade+")";        // Has two colours to look like shading, code is same, but for other side
+
+      ctx.beginPath();
+      ctx.moveTo(x+(width/2), y);                              // Right bottom corner
+      ctx.lineTo(x, y);
+
+      ctx.lineTo(x, y-height);
+      ctx.fill();
+   }
+
+   if (rotation == 2) {                                        // if we are wanting it to face right, same code as above, but for rotated
+      ctx.fillStyle="rgba(38, 77, 27, "+levelFade+")";
+      ctx.beginPath();
+      ctx.moveTo(x, y-(width/2));
+      ctx.lineTo(x, y);
+      ctx.lineTo(x+height, y);
+      ctx.fill();
+
+      ctx.fillStyle="rgba(70, 130, 53, "+levelFade+")";
+      ctx.beginPath();
+      ctx.moveTo(x, y+(width/2));
+      ctx.lineTo(x, y);
+      ctx.lineTo(x+height, y);
+      ctx.fill();
+   }
+
+   if (rotation == 3) {                                        // if we are wanting it to face downwards
+
+      ctx.fillStyle="rgba(38, 77, 27, "+levelFade+")";
+      ctx.beginPath();
+      ctx.moveTo(x+(width/2), y);
+      ctx.lineTo(x, y);
+      ctx.lineTo(x, y+height);
+      ctx.fill();
+
+      ctx.fillStyle="rgba(70, 130, 53, "+levelFade+")";
+      ctx.beginPath();
+      ctx.moveTo(x-(width/2), y);
+      ctx.lineTo(x, y);
+      ctx.lineTo(x, y+height);
+      ctx.fill();
+   }
+   
+   if (rotation == 4) {                                        // if we are wanting it to face right
+      ctx.fillStyle="rgba(38, 77, 27, "+levelFade+")";
+      ctx.beginPath();
+      ctx.moveTo(x, y+(width/2));
+      ctx.lineTo(x, y);
+      ctx.lineTo(x-height, y);
+      ctx.fill();
+
+      ctx.fillStyle="rgba(70, 130, 53, "+levelFade+")";
+      ctx.beginPath();
+      ctx.moveTo(x, y-(width/2));
+      ctx.lineTo(x, y);
+      ctx.lineTo(x-height, y);
+      ctx.fill();
+   }
+   ctx.restore();
+}
+
+function DrawJumpPad(x, y, width, height) {                                   // Draws a jump pad
+   ctx.fillStyle="rgba(62, 133, 61, " + levelFade + ")";                      // Correct colour
+
+   ctx.beginPath();
+   ctx.ellipse(x, y, width, height, Math.PI, 0, Math.PI);                     // Elipse based on width and height
+   ctx.fill();
+}
+
+function NextLevelSequence() {                                                // Sequence for changing lvls, makes the player stop gravity, fly over to the left side, and then drop down
+   
+   applyGravity = false;
+   if (player.x > 150) {                                                               // this acceletates the player left when the x value is not what we want it to be                           
+      levelFading = true;                                                              //
+      if (player.x > (myCanvas.width/2 + 10) && level != 16) {                         //
+            player.acceleration_x = -0.3;                                              // 
+
+      } else if (level != 17) {player.acceleration_x = 0.3; nextLevelTimer = 0;}       // this decelerates the player + sets the timer before the player drops to 0
+   }
+   else if (nextLevelTimer < 60) {                                                     // this makes it wait a second once the player is where we want it               
+      nextLevelTimer ++;                                                               //                       
+      if (player.velocity_x >= 0) {player.acceleration_x = 0; player.velocity_x = 0;}  //
+   } 
+   else if (levelFading == false) {                                                    // this section doesn't run until all the "levelFading == true" stuff below has run
+      applyGravity = true;                                                             // turn on gravity
+      if (playerTouchingGround == true) {                                              // once player has touched the ground, stop nextlevel sequence
+         nextLevel = false;                                                            // and allow movement
+         freezeKeys = false;
+      }
+   }
+   if (levelFading == true) {                                                          // while we are fading in or out
+      if (levelFade <= 0) {levelFadeDirection = true; levelFade = 0; level ++;}        // once the previous level has disappeared, make us start fading in again with the next level
+      if (levelFade >= 1 && levelFadeDirection == true) {                              // if we are fading in with the next level
+         levelFading = false; levelFade = 1;                                           // turns off the fading once we have fully faded (LevelFade is a value betw 0 and 1)
+         downarrow = false; uparrow = false;                                           //
+         leftarrow = false; rightarrow = false;                                        // resets keys to stop anything getting stuck down
+      }
+      if (levelFadeDirection == false) {levelFade -= 0.02;}                            // in what incriment we would like to fade out
+      if (levelFadeDirection == true)  {levelFade += 0.015;}                           // in what incriment we would like to fade in
+   }
+}
+
+function playerTouchingColour(colour) {                                       // returns true if touching on any side, false otherwise
+
+   for (var i=0; i<24; i++) {if (touchingColour(player.x + i, player.y, colour) == true) {return true;}}                                  // top
+   for (var i=0; i<24; i++) {if (touchingColour(player.x + i, player.y + player.size_y + x_displacement, colour) == true) {return true;}} // bottom
+   for (var i=0; i<24; i++) {if (touchingColour(player.x, player.y + i, colour) == true) {return true;}}                                  // left
+   for (var i=0; i<24; i++) {if (touchingColour(player.x + player.size_x, player.y + i, colour) == true) {return true;}}                  // right
+
+   return false;
+}
+
+function playerCollisions() {                                                 // wall collisions for the player, top bottom and sides, not collisions with water and stuff like that
+
+   //--collision for the player's TOP side--\\
+
+   if (player.touching == 1) {                                                          // if we are touching the ceiling with our head
+         player.velocity_y = player.velocity_y * -0.1; player.acceleration_y = 0;       // make us bounce back downwards and stop our acceleration
+         if (sides[2] != 0) {player.y = player.y + sides[2]}                            // if we are slightly in the ceiling with our left then push us out by that amount
+         else if (sides[3] != 0){player.y = player.y + sides[3]}
+         else {player.y = player.y + sides[4]}                                          // else push us out by the amount we are in on our right
+      }
+
+   //--collision for the player's BOTTOM--\\
+
+   playerTouchingGround = false;
+
+   if (player.touching == 2) {                                                          // if we are touching the floor with our bottom
+      if (player.velocity_y >= 0){player.velocity_y = 0;
+         player.acceleration_y = 0; arewejumping = false;}                              // stop the guy
+
+      if (sides[2] != 0) {player.y = player.y - sides[2]}                               // if the left of us is touching something by some amount,
+   //                                                                                      then it pushes us up by that value, which will thus push us out of the floor if we are slightly in for some reason
+      else if (sides[3] != 0){player.y = player.y - sides[3]}
+      else {player.y = player.y - sides[4]}                                             // if we are not touching on the left by some amount, then push us up by the right's amount 
+   //                                                                                      (which may be 0 in which case nothing happens)
+
+      playerTouchingGround = true;
+      if (dieingAreWe == false) {FreezeKeys = false;}
+   }
+
+   //--collision for the player's LEFT side--\\
+
+   if (player.touching == 3) {                                                          // if we are touching on the left
+      player.velocity_x =  player.velocity_x * -0.1; player.acceleration_x = 0;         // stop the guy's sideways movement
+      if (rightarrow == true) {player.x += 1;}
+
+      if (leftarrow == true && uparrow == true && touchingWater == false) {             // wanting to wall jump, are we?
+         player.velocity_y = -(JumpingValue/1.1);                                       // propel us upwards
+         player.velocity_x = (JumpingValue/1.8);                                        // propel us sideways
+      }
+
+      if (sides[0] != 0) {player.x = player.x + sides[0] - 1}                           // if we are in the left wall by some amount, then do the same thing as if we are slightly in the floor but flipped to the side
+      
+      if (sides[1] == 24) {                                                             // see if we are now touching the floor with our bottom
+         if (player.velocity_y >= 0){player.velocity_y = 0;
+            player.acceleration_y = 0; arewejumping = false;}                           // so it will push us up as well as out
+         player.y = player.y - sides[3];                                                // pushes us out by how far we are in our right
+   //                                                                                      so that we don't get yeeted up (if it checked the left)
+   //                                                                                      
+
+         playerTouchingGround = true;
+         //FreezeKeys = false;
+      }            
+   }
+
+   //--collision for the player's RIGHT side--\\
+
+   if (player.touching == 4) {                                                          // if we are touching on the right
+      player.velocity_x =  player.velocity_x * -0.1; player.acceleration_x = 0;         // stop the guy's sideways movement
+      if (leftarrow == true) {player.x -= 1;}
+
+      if (rightarrow == true && uparrow == true && touchingWater == false) {            // wanting to wall jump, are we?
+         player.velocity_y = -(JumpingValue/1.1);                                       // propel us upwards
+         player.velocity_x = -(JumpingValue/1.8);                                       // propel us sideways
+      }
+
+      if (sides[0] != 0) {player.x = player.x - sides[0] + 1}                           // if we are in the left wall by some amount, then do the same thing as if we are slightly in the floor but flipped to the side
+      
+      if (sides[1] == 24) {                                                             // see if we are now touching the floor with our bottom
+         if (player.velocity_y >= 0){player.velocity_y = 0;
+            player.acceleration_y = 0; arewejumping = false;}                           // so it will push us up as well as out
+         player.y = player.y - sides[2];                                                // pushes us out by how far we are in our left
+         //                                                                                so that we don't get yeeted up (if it checked the left)
+         
+         playerTouchingGround = true;
+      }    
+   } 
+}
+
+function touchingColour (x, y, colour) {                                      // Outputs true or false if that single pixel is touching that colour, used below
+   // for this, you input the x and y value of the pixel you want, and you input the rgba value (in an array) of the colour you are looking for
+   // and it will output either true or false. This will work for anything but the canvas itself.
+   // make sure, if say you are making a platformer with this, that you detect the colour before drawing the player 
+   // or else it will just detect the player colour and fuck itself. This function is also by George
+    var pixel = ctx.getImageData(x,y,1,1);
+    var pixel_colour = pixel.data;
+    if (pixel_colour[0] == colour[0] && pixel_colour[1] == colour[1] && pixel_colour[2] == colour[2] && pixel_colour[3] == colour[3]) {return true;}
+    return false;
+}
+function colourCollision (thing, colour, x_displacement, y_displacement) {    // Outputs side that is touching most, 1-4, or 0 if not touching at all
+
+   // function (by George) in which you input a "thing" and the colour code of the colour you want, and it outputs a number between 0 and 4. 
+   // 1 means it is touching that colour on the top of the "thing", 2 - on the bottom, 3 - on left, 4 - on right. 0 means it is not touching that colour.
+   // So you write colourCollision(player, [r, g, b, a], 0)
+   sides = [0,0,0,0 , 0];
+    //ctx.fillText(sides, 80, 20);
+    for (var i=0; i<thing.size_x; i++) {if (touchingColour(thing.x + i, thing.y, colour) == true) {sides[0] ++;}} // top
+    for (var i=0; i<thing.size_x; i++) {if (touchingColour(thing.x + i, thing.y + thing.size_y + y_displacement, colour) == true) {sides[1] ++;}} // bottom
+    for (var i=0; i<thing.size_y; i++) {if (touchingColour(thing.x + x_displacement, thing.y + i, colour) == true) {sides[2] ++;}} // left
+    for (var i=0; i<thing.size_y; i++) {if (touchingColour(thing.x + thing.size_x + x_displacement, thing.y + i, colour) == true) {sides[3] ++;}} // right
+    
+    for (var i=0; i<thing.size_y; i++) {if (touchingColour(thing.x + 12, thing.y + i, colour) == true) {sides[4] ++;}} // top mid
+    
+    //                                                                                 checks every pixel of every wall, adds in a list whichever is highest is outputed
+    if (sides[0] > sides[1] && sides[0] > sides[2] && sides[0] > sides[3]) {return 1;}
+    if (sides[1] > sides[2] && sides[1] > sides[3] && sides[1] > sides[0]) {return 2;}
+    if (sides[2] > sides[3] && sides[2] > sides[0] && sides[2] >= sides[1]) {return 3;}   // >= on sides so that they take priorety
+    if (sides[3] > sides[0] && sides[3] >= sides[1] && sides[3] > sides[2]) {return 4;}
+
+    if (sides[0] == 0 && sides[1] == 0 && sides[2] == 0 && sides[3] == 0) {return 0;}
+    else {return 5;}
+}
+
+function justDiedWeHave(respawnx, respawny) {                                 // Initiates dying variables and sequence
+
+   //resetting the variables
+   dieingAreWe = false;                // in the process of dieing, are we?
+   playerFading = true;                // fading, are we?
+   playerFadeDirection = false;        // false for fade out, true for fade in
+
+   deathCounterSizeDirection = true;   // Death counter grows and initiates that sequence
+   deathCounterSizeChanging = true;       
+
+   player.velocity_y = 0;              // Stops us rising up after dying in water
+   player.acceleration_y = 0;
+
+   respawnPos[0] = respawnx; respawnPos[1] = respawny;                                    // sets our respawn position
+
+   applyGravity = false; player.velocity_x = 0; player.velocity_y = 0; FreezeKeys = true; // stop all movement
+   player.acceleration_x = 0; player.acceleration_y = 0;                                  //
+
+   if (player.y >= 476) {player.y = 476}                                                  // move us up so we're not half stuck below the level when we freeze
+   dieingAreWe = true; playerFading = true;                                               // initiates dieingAreWe and player fading
+}
+function diedHaveWe() {                                                       // Death sequence, player fades out, grows a bit, and death counter goes up whille growing and shrinking
+
+   if (playerFading == false) {                                                           // this section doesn't run until all the "playerFading == true" stuff below has run
+      applyGravity = true;                                                                // turn on gravity
+
+      if (playerTouchingGround == true) {                                                 // once player has touched the ground, stop nextlevel sequence
+         dieingAreWe = false;                                                             // and stop us from being in the process of dieing
+      }
+   }
+   if (playerFading == true) {                                                            // while we are fading in or out
+      player.velocity_y = 0;
+      player.acceleration_y = 0;
+      if (playerFade <= 0) {
+         playerFadeDirection = true; playerFade = 0;                                      // once the player has disappeared, make us start fading in again
+         player.x = respawnPos[0]; player.y = respawnPos[1];
+         player.velocity_y = 0;
+      }                  
+      if (playerFade >= 1 && playerFadeDirection == true) {                               // if we are fading in 
+
+         playerFading = false; playerFade = 1;                                            // turns off the fading once we have fully faded (playerFade is a value betw 0 and 1)
+         downarrow = false; uparrow = false;                                              //
+         leftarrow = false; rightarrow = false;                                           // resets keys to stop anything getting stuck down
+      }
+      if (playerFadeDirection == false) {
+         playerFade -= 0.05;                                                              // in what incriment we would like to fade out
+         player.size_x += 0.5; player.x -= 0.25;                                          // make us fatter
+         player.size_y += 0.5; player.y -= 0.25;                                          // make us taller
+      }                             
+      if (playerFadeDirection == true) {
+         playerFade += 0.025;                                                              // in what incriment we would like to fade in
+         player.size_x = 24; player.size_y = 24;
+         
+      }                              
+   }
+
+}
+
+function Timer() {                                                            // Does the timer in the top right
+
+   countupwards ++;                                                           // this will go up by 60 every second as we are in 60 fps
+   
+   if (timerYPos < 20) {timerYPos++}                                          // moves the timer down to the correct position
+
+   if (countupwards /60 == (Math.floor(countupwards / 60))) {                 // Every second (60 frames) adds a second
+      seconds ++;
+   }                                                                          
+   if (seconds >= 60) {
+      minutes++;
+      seconds = 0;
+   }
+
+   if (seconds < 10) {printSeconds = "0" + seconds}                           // so that we have a 0 in front of seconds so it always fills 2 digits
+   else {printSeconds = seconds;}
+
+   ctx.font="18px Arial"; 
+   ctx.fillStyle="rgb(182, 235, 166)";
+   if (minutes < 10) {ctx.fillText("0" + minutes + ":" + printSeconds, 450, timerYPos)}    // put a 0 in front of minutes if it's less than 10
+   else {ctx.fillText(minutes + ":" + printSeconds, 450, timerYPos)}                       // otherwise don't do that
+
+}
+
+function DisplayDeathCounter() {                                              // Death counter in top left, also does the grow and shrink
+   
+   if (deathCounterMode == false && dieingAreWe == true) {                                // for the first death we have
+
+      if (deathCounterXPos < 9) {deathCounterXPos++; deathCounterSize = 40;}              // make the death counter animate on
+      else if (deathCounterXPos < 10) {deathCounterXPos++; deaths++}                      // this will only run once, and will change the death counter up by 1
+
+      if (deathCounterSize > 18 && deathCounterXPos == 10) {deathCounterSize-=0.5;}       // make the death counter smaller again
+      else if (deathCounterSize == 18) {deathCounterMode = true}                          // set this to true so that for future deaths it will run the next bit of code
+      deathCounterSizeChanging = false;
+   }
+
+   if (deathCounterMode == true && deathCounterSizeChanging == true) {                                             // in every other case other than the first death this bit will activate
+      deathCounterWaitAfterChange++                                                                                // timer so that the number stays big for a bit                                                                         
+      if (deathCounterSize < 40 && deathCounterSizeDirection == true) {                                            // if we are wanting the death counter to increase size and it is less than the desired size
+         deathCounterSize+=0.5; deathCounterWaitAfterChange = 0;                                                   // make the death counter bigger and reset the timer which we will use later
+      }
+      if (deathCounterSize == 40 && deathCounterSizeDirection == true) {                                           // increase the death counter and change the fade direction
+         deaths++; deathCounterSizeDirection = false;                                                              //
+      }
+      if (deathCounterSize > 18 && deathCounterSizeDirection == false && deathCounterWaitAfterChange >= 40) {      // once we have waited for a bit for the timer to get to 40,
+         deathCounterSize-=0.5;                                                                                    // then start shrinking the death counter again
+      }
+      if (deathCounterSize == 18 && deathCounterSizeDirection == false) {
+         deathCounterSizeChanging = false; deathCounterWaitAfterChange = 0;
+      }
+   }
+
+   ctx.font=deathCounterSize + "px Arial"; 
+   ctx.fillStyle="rgb(182, 235, 166)";
+   if (level != 0 && level != 17) {ctx.fillText(deaths, deathCounterXPos, 2 + deathCounterSize);}
+   
+
+}
+
+function KeyDownListener (MyEvent) {                                          // Does keydoard inputs
+   
+   if (FreezeKeys == false) {
+      switch (MyEvent.keyCode) {
+      case 37: 
+      case 65:
+      leftarrow = true;     // left
+         break;
+      case 38: 
+      case 87:
+      uparrow = true;       // up
+         break;
+      case 39: 
+      case 68:
+      rightarrow = true;    // right
+         break;
+      case 40: 
+      case 83:
+      downarrow = true;     // down
+         break;
+      }
+   }
+   MyEvent.preventDefault();
+
+}
+function KeyUpListener (MyEvent) {                                            // Same thing as above, but for when keys are released
+
+   if (FreezeKeys == false) {
+      switch (MyEvent.keyCode) {
+      case 37: 
+      case 65:
+      leftarrow = false;     // left
+            break;
+      case 38: 
+      case 87:
+      uparrow = false;       // up
+            break;
+      case 39: 
+      case 68:
+      rightarrow = false;    // right
+            break;
+      case 40: 
+      case 83:
+      downarrow = false;     // down
+            break;
+      }
+   }
+}
+function MouseMoveHandler (MyEvent) {                                         // Detects the mouse movement and sets variables: mouse_x and mouse_y to that
+   var rect = myCanvas.getBoundingClientRect();
+   mouse_x= Math.floor((MyEvent.clientX - rect.left - 10) / (9/5000 * height_of_whole_page)); // Whole shit show about scaling and stuff like that
+   mouse_y= Math.floor((MyEvent.clientY - rect.top - 10) / (9/5000 * height_of_whole_page));  // Makes sure mouse pos is in the right place, even if browser size scales down / up
+}
+
+function OnMouseDown() {                                                      // Tells us when the mouse is clicked
+   ismousedown = true;
+}
+function OnMouseUp() {                                                        //                            not clicked
+   ismousedown = false;
+}
+
+addEventListener("mousemove", MouseMoveHandler); 
+addEventListener("keydown", KeyDownListener);
+addEventListener("keyup", KeyUpListener);
+addEventListener("mousedown", OnMouseDown);
+addEventListener("mouseup", OnMouseUp);
+
+setInterval(Do_a_Frame, 1000/FPS);                             // set my frame renderer
+
+</script>  
+
+</body>
+</html>
