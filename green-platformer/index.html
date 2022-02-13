@@ -1437,8 +1437,95 @@ function DisplayDeathCounter() {                                              //
 
 }
 
+function RestartGame() {
+   //alert("vgbhnj")
+   ismousedown = false;               // Is the mouse clicked or not
+   leftarrow = false;                 //
+   rightarrow = false;                // are the various arrow keys pressed
+   uparrow = false;                   //
+   downarrow = false;                 //
+
+   //start screen variables
+   screenXAcc = false;
+   greenXPos = 4;
+   greenXVel = 0;
+   aMonochromaticXPos = 10;
+   aMonochromaticXVel = 0;
+   platformerXPos = 10;
+   platformerXVel = 0;
+   BeginRectWidthShit[0] = 282;
+   BeginRectWidthShit[1] = 0;
+   BeginRectWidthShit[2] = 0;
+
+   //timer
+   countupwards = 0;
+   seconds = 0;
+   minutes = 0;
+   shouldWeBeCountingUp = false;
+
+   //death counter
+   deaths = 0;
+   deathCounterSize = 18;              // font size of the death counter, which increases every time you die
+   deathCounterSizeDirection = true;
+   deathCounterSizeChanging = false;
+   deathCounterXPos = -20;
+   deathCounterMode = false;           // false for first death, true for every other death   
+   deathCounterWaitAfterChange = 0;       
+
+   //level variables
+   level = 0;                          // this variable will control which level we are on, 0 means the start screen
+
+   levelFading = false;
+   levelFade = 1;                      // the alpha value for fading
+   levelFadeDirection = false;         // false for fade out, true for fade in
+   nextLevel = false;
+   nextLevelTimer = 0;
+
+   // player variables
+   arewejumping = false;               // jumping, ARE WE???
+   playerTouchingGround = false;
+   rotatingAreWe = false;              // is the player rotating
+   rotationDirection = false;
+   applyGravity = true;                // applies gravity when true
+   FreezeKeys = true;                  // true, so cant move till touch ground at start
+   touchingWater = false;              // are we touching water
+   player.x = 10;
+   player.y = 229;
+   player.velocity_x = 0; player.acceleration_x = 0;
+   player.velocity_y = 0; player.acceleration_y = 0;
+
+   // player dieing variables
+   dieingAreWe = false;                // in the process of dieing, are we?
+   playerFading = false;               // fading, are we?
+   playerFade = 1;                     // how visible are we?
+   playerFadeDirection = false;        // false for fade out, true for fade in
+
+   // variables for specific levels
+   blockade_y_lvl16_left = 200; blockade_y_lvl16_right = 300;   // y coords for both blockades
+   wait_interval_until_right_blockade_opens = 0;                    // variable which will be used to store the timeout for the opening of the right blockade
+   right_blockade_should_be_opening = false;                        // the right blockade opening, SHOULD IT BE?
+
+   // end sequence variables
+   death_counter_x = 10; death_counter_y = 20;
+   timerXPos = 450; timerYPos = 0;
+   timerXVel = 0; timerYVel = 0;
+   timerXAcc = 0; timerYAcc = 0;
+   timer_moving = true;                // Is the timer moving to the middle left
+   timer_growing = false;              // Is it growing
+   timer_grow_factor = 0;              // By how much
+   timer_size = 18;                    // How fat are we currently
+   add_to_timer = 0;                   // Counts upwards while in end sequence,  helps deaths --> time 
+   speed_for_conversion = 40;
+   death_counter_alpha = 1;            // Opacity for death counter fading out once at 0
+   end_text_alpha = 0;
+   link_copied_alpha = 0;
+   link_copied_fading = false;
+   link_copied_fading_direction = true;
+}
+
 function KeyDownListener (MyEvent) {                                          // Does keydoard inputs
    
+   if (MyEvent.keyCode === 82) {RestartGame()}
    if (FreezeKeys == false) {
       switch (MyEvent.keyCode) {
       case 37: 
