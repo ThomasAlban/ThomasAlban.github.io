@@ -37,7 +37,7 @@
       left: 0;
       right: 0;
       
-      border: 10px solid rgb(11, 85, 36);
+      /* border: 10px solid rgb(11, 85, 36); */
    ">
 
 </div>
@@ -64,37 +64,24 @@ let link_copied_fading_directionb = 1;
 
 let mouse_xb = 0;                       //
 let mouse_yb = 0;                       // Where is the mouse
+let ismousedownb = false;
 
 
-
-// LINK COPIED FADING STUFF
-
-function FadeLinkCopiedb() {
+function DoAFrame() {
+    ctxb.clearRect(0, 0, bottomCanvas.width, bottomCanvas.height);
+    
     if (link_copied_fadingb) {
         if (link_copied_alphab >= 1) {link_copied_alphab = 1; link_copied_fading_directionb = -1;}
         if (link_copied_alphab < 0) {link_copied_alphab = 0; link_copied_fading_directionb = 1; link_copied_fadingb = false;}
         link_copied_alphab += 0.02 * link_copied_fading_directionb;
-        setTimeout(FadeLinkCopiedb, 17)
-            
-        ctxb.fillStyle="rgba(49, 97, 34, " + link_copied_alphab + ")";
-        ctxb.fillText("Link",400,438)
-        ctxb.fillText("Copied",380,463)
-   }
-}
-
-function MouseMoveHandlerb (MyEvent) {                                         // Detects the mouse movement and sets variables: mouse_x and mouse_y to that
-    height_of_whole_second_page = document.getElementById("heightandwidth").offsetHeight;         // set the variable to height of page
-    width_of_whole_second_page = document.getElementById("heightandwidth").offsetWidth;           // set the variable to width of page
-
-    ctxb.clearRect(0, 0, bottomCanvas.width, bottomCanvas.height);
-    ctxb.fillText("gfhjk",20,60);
-    
-    var rectb = bottomCanvas.getBoundingClientRect();
-    mouse_xb= Math.floor((MyEvent.clientX - rectb.left - 10) / (9/5000 * height_of_whole_second-page)); // Whole shit show about scaling and stuff like that
-    mouse_yb= Math.floor((MyEvent.clientY - rectb.top - 10) / (9/5000 * height_of_whole_second_page));  // Makes sure mouse pos is in the right place, even if browser size scales down / up
+        ctxb.clearRect(0, 0, bottomCanvas.width, bottomCanvas.height)
+        ctxb.fillStyle="rgba(49, 97, 34, " + link_copied_alphab + ")";        
+        ctxb.fillText("Link",315,35)
+        ctxb.fillText("Copied",300,60)
+    }
 
     ctxb.font = "30px Arial"; 
-    if (mouse_xb > 39 && mouse_xb< 161 && mouse_yb > 50 && mouse_yb < 60) {
+    if (mouse_xb > 59 && mouse_xb< 261 && mouse_yb > 24 && mouse_yb < 95) {
             
         ctxb.fillStyle="rgb(49, 97, 34)";
         ctxb.fillRect(40, 20, 120, 40);                             // highlights start button if mouse is over it
@@ -109,9 +96,10 @@ function MouseMoveHandlerb (MyEvent) {                                         /
         ctxb.strokeRect(42, 21, 118, 38);                             // highlights start button if mouse is over it
 
         ctxb.fillStyle="rgb(49, 97, 34)";
-        ctxb.fillText("SHARE", 50, 450);
+        ctxb.fillText("SHARE", 50, 50);
     }
-    if (ismousedownb == true && mouse_xb > 39 && mouse_xb < 161 && mouse_yb > 50 && mouse_y < 60) {   // If we are clicking on the "Click here to start"
+    if (ismousedownb && mouse_xb > 63 && mouse_xb< 269 && mouse_yb > 30 && mouse_yb < 100) {   // If we are clicking on the "SHARE"
+        
         face_numb = Math.floor(Math.random()*7 + 1);
         if (face_numb == 1) {faceb = "~_~"}                           // Picks a random face cos why not
         if (face_numb == 2) {faceb = ">_<"}
@@ -121,7 +109,7 @@ function MouseMoveHandlerb (MyEvent) {                                         /
         if (face_numb == 6) {faceb = ";)"}
         if (face_numb == 7) {faceb = "[:"}
 
-        contentb = "Yo Jon, \nCheck out this awesome game I've found. My score was . I bet you can't beat my time "+ face +" \n\n" +
+        contentb = "Yo Jon, \nCheck out this awesome game I've found. My score was . I bet you can't beat my time "+ faceb +" \n\n" +
                     "https://thomasalban.com/green-platformer/"
         //
 
@@ -129,14 +117,24 @@ function MouseMoveHandlerb (MyEvent) {                                         /
         link_copied_fadingb = true;
         link_copied_fading_directionb = 1;
 
-        FadeLinkCopiedb();
-
         navigator.clipboard.writeText(contentb);
     }
 }
 
+function MouseMoveHandlerb (MyEvent) {                                         // Detects the mouse movement and sets variables: mouse_x and mouse_y to that
+    height_of_whole_second_page = document.getElementById("heightandwidth").offsetHeight;         // set the variable to height of page
+    width_of_whole_second_page = document.getElementById("heightandwidth").offsetWidth;           // set the variable to width of page
+    
+    var rectb = bottomCanvas.getBoundingClientRect();
+    scale_factor = (1/4000 * height_of_whole_second_page) + (0.5 / 760 * width_of_whole_second_page)
+    mouse_xb= Math.floor((MyEvent.clientX - rectb.left - 10) / scale_factor); // Whole shit show about scaling and stuff like that
+    mouse_yb= Math.floor((MyEvent.clientY - rectb.top - 10) / scale_factor);  // Makes sure mouse pos is in the right place, even if browser size scales down / up
+}
+
 function OnMouseDownb() {ismousedownb = true;} // Tells us when the mouse is clicked
 function OnMouseUpb()   {ismousedownb = false;}//                            not clicked
+
+setInterval(DoAFrame, 20);
 
 addEventListener("mousedown", OnMouseDownb);
 addEventListener("mouseup", OnMouseUpb);
@@ -293,7 +291,7 @@ MySprite.prototype.Do_Frame_Things = function() {
    
    this.touching = colourCollision(player, [30, 66, 19, 255], 0, 1)     // this checks if the player is touching the colour of the floor
 
-   playerCollisions();
+   if(WeAreColliding(0,0)) {playerCollisions();}
 
    ctx.translate(this.x + this.size_x/2, this.y + this.size_y/2);    // move the canvas to the guy
    ctx.rotate(this.angle * Math.PI / 180);                           // rotating
@@ -1209,6 +1207,25 @@ function playerTouchingColour(colour) {                                       //
    for (var i=0; i<24; i++) {if (touchingColour(player.x + player.size_x, player.y + i, colour) == true) {return true;}}                  // right
 
    return false;
+}
+
+function WeAreColliding(offset_x, offset_y) {
+    offset_x += 12; offset_y += 12;                                                         // Player pos is from top left, this counteracts that
+    //                                                                                      // CORNERS
+    if (touchingColour(player.x-12 + offset_x, player.y-12 + offset_y, [30, 66, 19, 255])   // Top left
+     || touchingColour(player.x+12 + offset_x, player.y-12 + offset_y, [30, 66, 19, 255])   // Top right
+     || touchingColour(player.x-12 + offset_x, player.y+12 + offset_y, [30, 66, 19, 255])   // Bottom left
+     || touchingColour(player.x+12 + offset_x, player.y+12 + offset_y, [30, 66, 19, 255])   // Bottom right
+
+     //                                                                                     // SIDES
+     || touchingColour(player.x    + offset_x, player.y-12 + offset_y, [30, 66, 19, 255])   // Top
+     || touchingColour(player.x+12 + offset_x, player.y    + offset_y, [30, 66, 19, 255])   // Right
+     || touchingColour(player.x    + offset_x, player.y+12 + offset_y, [30, 66, 19, 255])   // Bottom
+     || touchingColour(player.x-12 + offset_x, player.y    + offset_y, [30, 66, 19, 255])   // Left
+    ) {
+        return true;
+    }
+    return false;
 }
 
 function playerCollisions() {                                                 // wall collisions for the player, top bottom and sides, not collisions with water and stuff like that

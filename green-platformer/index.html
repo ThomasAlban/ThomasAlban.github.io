@@ -21,121 +21,126 @@
       YOU WON'T FIND ANYWHERE ELSE SUCH A THRILLING YET SIMPLE PLATFORMER GAME 
       <i>THAT TOTALLY DOES NOT LAG OUT YOUR COMPUTER DUE TO IT BEING CODED INEFFICIENTLY</i>. NO, NOT AT ALL.
    </p>
-<!-- 
-   <canvas id="bottomCanvas" width="300" height="50" style="
-      background-color:rgb(98, 180, 73);
-      /* background-color:rgb(27, 73, 13); */
-      padding: 0;
-      margin: auto;
-      display: block;
-      height: 20%;
-      width: height;
+   <canvas id="bottomCanvas" width="400" height="76" style="
+   background-color:rgb(98, 180, 73);
+   /* background-color:rgb(27, 73, 13); */
+   padding: 0;
+   margin: auto;
+   display: block;
+   height: calc(10vh + 5vw);
+   width: height;
 
-      position: absolute;
-      top: calc(130vh + (65vw));
-      bottom: 0;
-      left: 0;
-      right: 0;
-      
-      border: 10px solid rgb(19, 102, 47);
-   "> -->
+   position: absolute;
+   top: calc(130vh + 65vw);
+   bottom: 0;
+   left: 0;
+   right: 0;
+   
+   /* border: 10px solid rgb(11, 85, 36); */
+">
 
 </div>
-<!-- 
+
 <script>
-// Share button for bottom canvas
+// Share button for bottom canvas, every variable now has a b on the bottom of it for bottom canvas, cos can't use samse variables
 
-let height_of_whole_page = 0;          // the height of the whole page which we will set in do_a_frame
-let width_of_whole_page = 0;           // the width "
-const ctx = bottomCanvas.getContext("2d"); // Get the drawing context for the canvas
-/* 
-ctx.font="100px";
-ctx.fillStyle="rgb(100,100,100)"
-ctx.fillText("hello"); */
-
-let link_copied_alpha = 0;
-let link_copied_fading = false;
-let link_copied_fading_direction = true;
-
-let mouse_x = 0;                       //
-let mouse_y = 0;                       // Where is the mouse
+let height_of_whole_second_page = 0;          // the height of the whole page which we will set in do_a_frame
+let width_of_whole_second_page = 0;           // the width "
+const ctxb = bottomCanvas.getContext("2d"); // Get the drawing context for the canvas
 
 
+ctxb.fillStyle="rgb(10,100,10)";
 
-// LINK COPIED FADING STUFF
+ctxb.font="bold 40px Arial";
 
-/* function FadeLinkCopied() {
-   if (link_copied_fading == true) {
-      if (link_copied_alpha >= 1) {link_copied_alpha = 1; link_copied_fading_direction = -1;}
-      if (link_copied_alpha < 0) {link_copied_alpha = 0; link_copied_fading_direction = 1; link_copied_fading = false;}
-      link_copied_alpha += 0.02 * link_copied_fading_direction
-   }
-}
- */
-/* function MouseMoveHandler (MyEvent) {                                         // Detects the mouse movement and sets variables: mouse_x and mouse_y to that
-   height_of_whole_page = document.getElementById("heightandwidth").offsetHeight;         // set the variable to height of page
-   width_of_whole_page = document.getElementById("heightandwidth").offsetWidth;           // set the variable to width of page
+//ctxb.fillText("hello",50,50); 
 
-   ctx.clearRect(0, 0, bottomCanvas.width, bottomCanvas.height);
-   ctx.fillText("gfhjk");
-   var rect = bottomCanvas.getBoundingClientRect();
-   mouse_x= Math.floor((MyEvent.clientX - rect.left - 10) / (9/5000 * height_of_whole_page)); // Whole shit show about scaling and stuff like that
-   mouse_y= Math.floor((MyEvent.clientY - rect.top - 10) / (9/5000 * height_of_whole_page));  // Makes sure mouse pos is in the right place, even if browser size scales down / up
+//ctxb.fillRect(20,20,10,10)
 
-   ctx.font = "30px Arial"; 
-   if (mouse_x > 39 && mouse_x < 161 && mouse_y > 419 && mouse_y < 461) {
+let link_copied_alphab = 0;
+let link_copied_fadingb = false;
+let link_copied_fading_directionb = 1;
 
-      ctx.fillStyle="rgba(49, 97, 34)";
-      ctx.fillRect(40, 420, 120, 40);                             // highlights start button if mouse is over it
+let mouse_xb = 0;                       //
+let mouse_yb = 0;                       // Where is the mouse
+let ismousedownb = false;
 
-      ctx.fillStyle="rgba(104, 186, 78)";
-      ctx.fillText("SHARE", 50, 450);
 
-   }
-   else {
-      ctx.strokeStyle = "rgba(49, 97, 34)";
-      ctx.lineWidth = 5;
-      ctx.strokeRect(42, 421, 118, 38);                             // highlights start button if mouse is over it
+function DoAFrame() {
+ ctxb.clearRect(0, 0, bottomCanvas.width, bottomCanvas.height);
+ 
+ if (link_copied_fadingb) {
+     if (link_copied_alphab >= 1) {link_copied_alphab = 1; link_copied_fading_directionb = -1;}
+     if (link_copied_alphab < 0) {link_copied_alphab = 0; link_copied_fading_directionb = 1; link_copied_fadingb = false;}
+     link_copied_alphab += 0.02 * link_copied_fading_directionb;
+     ctxb.clearRect(0, 0, bottomCanvas.width, bottomCanvas.height)
+     ctxb.fillStyle="rgba(49, 97, 34, " + link_copied_alphab + ")";        
+     ctxb.fillText("Link",315,35)
+     ctxb.fillText("Copied",300,60)
+ }
 
-      ctx.fillStyle="rgba(49, 97, 34)";
-      ctx.fillText("SHARE", 50, 450);
-   }
-   if (ismousedown == true && mouse_x > 39 && mouse_x < 161 && mouse_y > 419 && mouse_y < 461) {   // If we are clicking on the "Click here to start"
-      face_num = Math.floor(Math.random()*7 + 1);
-      if (face_num == 1) {face = "~_~"}                           // Picks a random face cos why not
-      if (face_num == 2) {face = ">_<"}
-      if (face_num == 3) {face = "^_^"}
-      if (face_num == 4) {face = "*_*"}
-      if (face_num == 5) {face = "'_'"}
-      if (face_num == 6) {face = ";)"}
-      if (face_num == 7) {face = "[:"}
+ ctxb.font = "30px Arial"; 
+ if (mouse_xb > 59 && mouse_xb< 261 && mouse_yb > 24 && mouse_yb < 95) {
+         
+     ctxb.fillStyle="rgb(49, 97, 34)";
+     ctxb.fillRect(40, 20, 120, 40);                             // highlights start button if mouse is over it
 
-      content = "Yo Jon, \nCheck out this awesome game I've found. My score was . I bet you can't beat my time "+ face +" \n\n" +
-                "https://thomasalban.com/green-platformer/"
-      //
+     ctxb.fillStyle="rgb(104, 186, 78)";
+     ctxb.fillText("SHARE", 50, 50);
 
-      ismousedown = false;
-      link_copied_fading = true;
-      link_copied_fading_direction = 1;
+ }
+ else {
+     ctxb.strokeStyle = "rgb(49, 97, 34)";
+     ctxb.lineWidth = 5;
+     ctxb.strokeRect(42, 21, 118, 38);                             // highlights start button if mouse is over it
 
-      navigator.clipboard.writeText(content);
-   }
+     ctxb.fillStyle="rgb(49, 97, 34)";
+     ctxb.fillText("SHARE", 50, 50);
+ }
+ if (ismousedownb && mouse_xb > 63 && mouse_xb< 269 && mouse_yb > 30 && mouse_yb < 100) {   // If we are clicking on the "SHARE"
+     
+     face_numb = Math.floor(Math.random()*7 + 1);
+     if (face_numb == 1) {faceb = "~_~"}                           // Picks a random face cos why not
+     if (face_numb == 2) {faceb = ">_<"}
+     if (face_numb == 3) {faceb = "^_^"}
+     if (face_numb == 4) {faceb = "*_*"}
+     if (face_numb == 5) {faceb = "'_'"}
+     if (face_numb == 6) {faceb = ";)"}
+     if (face_numb == 7) {faceb = "[:"}
 
-   
-   ctx.fillStyle="rgba(49, 97, 34, " + link_copied_alpha + ")";
-   ctx.fillText("Link",400,438)
-   ctx.fillText("Copied",380,463)
+     contentb = "Yo Jon, \nCheck out this awesome game I've found. My score was . I bet you can't beat my time "+ faceb +" \n\n" +
+                 "https://thomasalban.com/green-platformer/"
+     //
+
+     ismousedownb = false;
+     link_copied_fadingb = true;
+     link_copied_fading_directionb = 1;
+
+     navigator.clipboard.writeText(contentb);
+ }
 }
 
-function OnMouseDown() {ismousedown = true;} // Tells us when the mouse is clicked
-function OnMouseUp()   {ismousedown = false;}//                            not clicked
- */
-addEventListener("mousedown", OnMouseDown);
-addEventListener("mouseup", OnMouseUp);
-addEventListener("mousemove", MouseMoveHandler); 
+function MouseMoveHandlerb (MyEvent) {                                         // Detects the mouse movement and sets variables: mouse_x and mouse_y to that
+ height_of_whole_second_page = document.getElementById("heightandwidth").offsetHeight;         // set the variable to height of page
+ width_of_whole_second_page = document.getElementById("heightandwidth").offsetWidth;           // set the variable to width of page
+ 
+ var rectb = bottomCanvas.getBoundingClientRect();
+ scale_factor = (1/4000 * height_of_whole_second_page) + (0.5 / 760 * width_of_whole_second_page)
+ mouse_xb= Math.floor((MyEvent.clientX - rectb.left - 10) / scale_factor); // Whole shit show about scaling and stuff like that
+ mouse_yb= Math.floor((MyEvent.clientY - rectb.top - 10) / scale_factor);  // Makes sure mouse pos is in the right place, even if browser size scales down / up
+}
+
+function OnMouseDownb() {ismousedownb = true;} // Tells us when the mouse is clicked
+function OnMouseUpb()   {ismousedownb = false;}//                            not clicked
+
+setInterval(DoAFrame, 20);
+
+addEventListener("mousedown", OnMouseDownb);
+addEventListener("mouseup", OnMouseUpb);
+addEventListener("mousemove", MouseMoveHandlerb); 
 
 </script>
- -->
+
 <canvas id="myCanvas" width=500 height=500 style="
    background-color:rgb(98, 180, 73);
    padding: 0;
