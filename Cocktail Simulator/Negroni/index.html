@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50" id="top">
+
+
+  <nav class="navbar navbar-inverse navbar-fixed-top py-5">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="../index.html">
+              <p class="navbar-brand-text">The Cocktailor</p>
+            </a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="#top" class="navbar-links">Introduction</a></li>
+          <li><a href="#step1" class="navbar-links">Step 1</a></li>
+          <li><a href="#step2" class="navbar-links">Step 2</a></li>
+          <li><a href="#done" class="navbar-links">Done</a></li>
+        </ul>
+    </div>
+  </nav>
+
+
+  <div class="jumbotron">
+    <h1 class="text-center" id="heading">
+      How to make a <b>Negroni</b> Cocktail
+    </h1>      
+    <p class="text-center" id="secondary-heading"><i>
+      To make the perfect classic negroni cocktail all you need is balance: use equal parts gin, vermouth and Campari, 
+      and choose the best products you have in reach
+    </i></p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="container-fluid">
+    <div class="row step-row" id="step1">
+      <div class="col-sm-6 cocktail-image-1"></div>
+      <div class="col-sm-6 cocktail-text-container">
+        <h1 class="step-header">
+          Step 1
+        </h1>
+        <p class="step-text">
+          Pour 25ml of <i>gin</i>, 25ml of <i>sweet vermouth</i> and 25ml of <i>Campari</i> into a mixing glass or jug with ice. 
+          Stir well until the outside of the glass feels cold.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="container-fluid">
+    <div class="row step-row" id="step2">
+      <div class="col-sm-6 cocktail-text-container">
+        <h1 class="step-header">
+          Step 2
+        </h1>
+        <p class="step-text">
+          Strain into a tumbler and add 1 large ice sphere or some fresh ice, and garnish with an <i>orange slice</i>, 
+          using a blood orange when in season.
+        </p>
+      </div>
+      <div class="col-sm-6 cocktail-image-2"></div>
+    </div>
+  </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="container-fluid text-center step-row" id="done">
+    <br><br>
+    <h1 class="step-header">
+      Done!
+    </h1>
+    <p class="step-text">
+      <i>Enjoy your cocktail!</i> If you enjoyed this experience, then share this website with the button below, 
+      or go back to the home page to choose another cocktail...
+    </p>
+    <br>
+    <button class="button" role="button" onclick="copyToClipboard()">Share this page!</button>
+    <a href="../index.html">
+      <button class="button" role="button">Go Home</button>
+    </a>
+  </div>
+
+  <div class="divider"></div>
+
+</body>
+
+<script> function copyToClipboard() {navigator.clipboard.writeText("link to page")} </script>
+
+</html>

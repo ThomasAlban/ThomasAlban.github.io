@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="three.js"></script>
+    <script src="OrbitControls.js"></script>  
+
+</head>
+<body>
+
+    <section id="startscreen">
+
+        <div class="logotext">
+            <h1 class="mainheading">
+                The Cocktailor
+            </h1>
+            <h3 class="secondheading">
+                Learn to make <i>great</i> cocktails in a fun and interactive way
+            </h3>
+        </div>
+
+        <img src="logo.png" alt="Logo" class="logoimage">
+        
+        <div class="scrlbtn-container">
+            <a id="scrlbtn" href="#cocktailselect">
+                <img src="downarrow.png" alt="Scroll Down" class="scrlbtn-img">
+            </a>
+            
+        </div>
+
+    </section>
+
+    <section id="cocktailselect">
+
+        <div class="gradientbottom"></div>
+        <canvas id="bg"></canvas>
+
+        <div class="cocktailnamecontainer">
+            <h2 class="chooseyourcocktail">
+                Choose your cocktail...
+            </h2>
+            <h3 id="cocktailname"></h3>
+            <h4 class="cocktailinstruction">
+                Click the cocktail again to learn how to make it!
+            </h4>
+        </div>
+        
+    </section>
+
+    <div class="divider"></div>
+    
+    <script src="main.js"></script>
+
+</body>
+</html>
