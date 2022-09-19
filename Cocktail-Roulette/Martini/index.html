@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+
+<body data-spy="scroll" data-target=".navbar" data-offset="50" id="top">
+
+
+  <nav class="navbar navbar-inverse navbar-fixed-top py-5">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="../index.html">
+              <p class="navbar-brand-text">Cocktail Roulette</p>
+            </a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="#top" class="navbar-links">Introduction</a></li>
+          <li><a href="#step1" class="navbar-links">Step 1</a></li>
+          <li><a href="#step2" class="navbar-links">Step 2</a></li>
+          <li><a href="#done" class="navbar-links">Done</a></li>
+        </ul>
+    </div>
+  </nav>
+
+
+  <div class="jumbotron">
+    <h1 class="text-center" id="heading">
+      How to make a <b>Martini</b> Cocktail
+    </h1>      
+    <p class="text-center" id="secondary-heading"><i>
+      Our version of the ultimate classic cocktail is stirred, not shaken. Serve your martini with a twist of lemon, or an olive
+    </i></p>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="container-fluid">
+    <div class="row step-row" id="step1">
+      <div class="col-sm-6 cocktail-image-1"></div>
+      <div class="col-sm-6 cocktail-text-container">
+        <h1 class="step-header">
+          Step 1
+        </h1>
+        <p class="step-text">
+          Stir 60ml of <i>gin</i> or <i>vodka</i>, 1 tbsp of <i>dry vermouth</i> and a 
+          little ice together or put them in a cocktail shaker to combine.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="container-fluid">
+    <div class="row step-row" id="step2">
+      <div class="col-sm-6 cocktail-text-container">
+        <h1 class="step-header">
+          Step 2
+        </h1>
+        <p class="step-text">
+          Strain into a chilled martini glass. Serve with an <i>olive</i>, on a <i>cocktail stick</i>, or with a twist of <i>lemon peel</i>.
+        </p>
+      </div>
+      <div class="col-sm-6 cocktail-image-2"></div>
+    </div>
+  </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="container-fluid text-center step-row" id="done">
+    <br><br>
+    <h1 class="step-header">
+      Done!
+    </h1>
+    <p class="step-text">
+      <i>Enjoy your cocktail!</i> If you enjoyed this experience, then share this website with the button below, 
+      or go back to the home page to choose another cocktail...
+    </p>
+    <br>
+    <button class="button" role="button" onclick="copyToClipboard()">Share this page!</button>
+    <a href="../index.html">
+      <button class="button" role="button">Go Home</button>
+    </a>
+  </div>
+
+  <div class="divider"></div>
+
+</body>
+
+<script> function copyToClipboard() {navigator.clipboard.writeText("link to page")} </script>
+
+</html>

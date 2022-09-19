@@ -1,0 +1,163 @@
+html{scroll-behavior: smooth}
+
+.navbar-brand-text {
+    color: transparent;
+    font-family: 'Playfair Display';
+    background-image:url(https://t3.ftcdn.net/jpg/02/96/79/82/360_F_296798219_SdbhwO6R9dx2i1F3nS8WvLmc5RPeS0Sl.jpg);
+    background-size: 50vw;
+    -webkit-background-clip: text;
+    animation: movebackground 40s infinite alternate linear;
+}
+
+.navbar-links {
+    font-family: 'Playfair Display';
+    font-style:italic;
+}
+
+@keyframes move-background {
+    from {background-position: 0vw}
+    to {background-position: 50vw}
+}
+
+@keyframes letter-spacing-opacity-animate {
+    from {letter-spacing: 0.01px; opacity: 0}
+    to {letter-spacing: 1px; opacity: 1}
+}
+
+#heading {
+    color: transparent;
+    font-family: 'Playfair Display';
+    background-image:url(https://t3.ftcdn.net/jpg/02/96/79/82/360_F_296798219_SdbhwO6R9dx2i1F3nS8WvLmc5RPeS0Sl.jpg);
+    background-size: 200vw;
+    -webkit-background-clip: text;
+    animation:
+        move-background 20s infinite alternate linear,
+        letter-spacing-opacity-animate 2s ease 0.2s 1 both
+    ;
+}
+
+
+#secondary-heading {
+    color: transparent;
+    font-family: 'Playfair Display';
+    font-size: 130%;
+    background-image:url(https://t3.ftcdn.net/jpg/02/96/79/82/360_F_296798219_SdbhwO6R9dx2i1F3nS8WvLmc5RPeS0Sl.jpg);
+    background-size: 200vw;
+    -webkit-background-clip: text;
+    animation: 
+        move-background 20s infinite alternate linear,
+        letter-spacing-opacity-animate 2s ease 1s 1 both
+    ;
+}
+
+.jumbotron {
+    margin-top:50px;
+    margin-bottom: 0;
+    background-image: radial-gradient(circle, #051a3d, #000610);
+    background-size: cover;
+}
+
+.divider {
+    width: 100%;
+    height: 1.5vh;
+    background-image:url(https://t3.ftcdn.net/jpg/02/96/79/82/360_F_296798219_SdbhwO6R9dx2i1F3nS8WvLmc5RPeS0Sl.jpg);
+    background-size: 200vw;
+    filter: blur(8px);
+    animation: move-background 20s infinite alternate linear;
+}
+
+.cocktail-image-1 {
+    height: 50vh;
+    background-image: url(https://assets-prd.punchdrink.com/wp-content/uploads/2021/07/20201200/Social-Kingston-Negroni-Rum-Cocktail-Recipe.jpg);
+    background-size: 120%;  
+    mask-image: linear-gradient(to right, rgba(0, 0, 0, 1.0) 50%, transparent 100%);
+}
+
+.cocktail-image-2 {
+    height: 50vh;
+    background-image: url(https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/negroni-1562327392.jpg);
+    background-size: 100%; 
+    mask-image: linear-gradient(to left, rgba(0, 0, 0, 1.0) 50%, transparent 100%);
+}
+
+.step-row {
+    height: 50vh;
+    top: 50%;
+    text-align: center;
+    background-image: radial-gradient(circle, #051a3d, #000610);
+}
+
+.cocktail-text-container {
+    top: 10%;
+}
+
+.step-header {
+    font-size: 4vw;
+    font-style: italic;
+    color: transparent;
+    font-family: 'Playfair Display';
+    background-image:url(https://t3.ftcdn.net/jpg/02/96/79/82/360_F_296798219_SdbhwO6R9dx2i1F3nS8WvLmc5RPeS0Sl.jpg);
+    background-size: 200vw;
+    -webkit-background-clip: text;
+
+    animation: 
+        move-background 20s infinite alternate linear,
+        letter-spacing-opacity-animate 2s ease 1.8s 1 both
+    ;
+}
+
+@keyframes step-opacity {
+    from {opacity: 0}
+    to {opacity: 0.6}
+}
+
+.step-text {
+    top: 50%;
+    font-size: 2vw;
+    color: white;
+    font-family: 'Playfair Display';
+    animation: step-opacity 2s ease 2.6s 1 both;
+}
+
+.button {
+  align-items: center;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: 'Playfair Display';
+  font-style: italic;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 3rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+}
+.button:hover,
+.button:focus {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  color: rgba(0, 0, 0, 0.65);
+}
+.button:hover {transform: translateY(-1px)}
+.button:active {
+  background-color: #F0F0F1;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  color: rgba(0, 0, 0, 0.65);
+  transform: translateY(0);
+}
