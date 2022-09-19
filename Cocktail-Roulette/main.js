@@ -160,10 +160,10 @@ function animate() {
                 intersects[0].object.scale.y +=0.2625;
             }   
 
-            if (objectBeingHoveredOver.name === "Tequila Sunrise" && pointerDown && cocktailNameTextOpacity >= 1) {window.location.href = "/Users/thomasalban/Library/CloudStorage/OneDrive-OundleSchool/Oundle School/6th Form/Computing/Cocktail Simulator/Tequila Sunrise/index.html"}
-            if (objectBeingHoveredOver.name === "Martini" && pointerDown && cocktailNameTextOpacity >= 1) {window.location.href = "/Users/thomasalban/Library/CloudStorage/OneDrive-OundleSchool/Oundle School/6th Form/Computing/Cocktail Simulator/Martini/index.html"}
-            if (objectBeingHoveredOver.name === "Cosmopolitan" && pointerDown && cocktailNameTextOpacity >= 1) {window.location.href = "/Users/thomasalban/Library/CloudStorage/OneDrive-OundleSchool/Oundle School/6th Form/Computing/Cocktail Simulator/Cosmopolitan/index.html"}
-            if (objectBeingHoveredOver.name === "Negroni" && pointerDown && cocktailNameTextOpacity >= 1) {window.location.href = "/Users/thomasalban/Library/CloudStorage/OneDrive-OundleSchool/Oundle School/6th Form/Computing/Cocktail Simulator/Negroni/index.html"}
+            if (objectBeingHoveredOver.name === "Tequila Sunrise" && pointerDown && cocktailNameTextOpacity >= 1) {window.location.href = "https://thomasalban.com/Cocktail-Roulette/Tequila Sunrise/"}
+            if (objectBeingHoveredOver.name === "Martini" && pointerDown && cocktailNameTextOpacity >= 1) {window.location.href = "https://thomasalban.com/Cocktail-Roulette/Martini/"}
+            if (objectBeingHoveredOver.name === "Cosmopolitan" && pointerDown && cocktailNameTextOpacity >= 1) {window.location.href = "https://thomasalban.com/Cocktail-Roulette/Cosmopolitan/"}
+            if (objectBeingHoveredOver.name === "Negroni" && pointerDown && cocktailNameTextOpacity >= 1) {window.location.href = "https://thomasalban.com/Cocktail-Roulette/Negroni/"}
 
         }
 
